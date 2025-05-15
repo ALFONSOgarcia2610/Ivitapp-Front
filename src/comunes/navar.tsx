@@ -2,7 +2,7 @@ import { User, LogOut } from "lucide-react";
 import { Link, useRouter } from '@tanstack/react-router';
 import { cerrarSesion } from '../sesiones/sesion';
 import { usuarioStore } from '../Store/authstore'
-
+import { ThemeSelector } from "@/pages/components/selector-theme";
 import {
   Sidebar,
   SidebarContent,
@@ -65,6 +65,7 @@ export default function Navbar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              <ThemeSelector />
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

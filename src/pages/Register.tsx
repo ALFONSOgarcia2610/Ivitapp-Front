@@ -28,8 +28,6 @@ export default function RegisterComponent() {
 
         await registerMutation.mutateAsync({ username, password })
 
-        console.log('🟢 Estado del store después del registro:', usuarioStore.state)
-
         if (usuarioStore.state.autenticado) {
             router.history.push('/')
         }

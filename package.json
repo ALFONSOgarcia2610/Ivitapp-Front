@@ -12,8 +12,10 @@
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.13",
     "@radix-ui/react-label": "^2.1.6",
+    "@radix-ui/react-select": "^2.2.4",
     "@radix-ui/react-separator": "^1.1.6",
     "@radix-ui/react-slot": "^1.2.2",
+    "@radix-ui/react-toggle": "^1.1.8",
     "@radix-ui/react-tooltip": "^1.2.6",
     "@shadcn/ui": "^0.0.4",
     "@tailwindcss/vite": "^4.1.7",
@@ -26,6 +28,7 @@
     "lucide-react": "^0.510.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "select": "^1.1.2",
     "sonner": "^2.0.3",
     "tailwind-merge": "^3.3.0"
   },
