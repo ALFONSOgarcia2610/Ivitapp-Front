@@ -1,40 +1,65 @@
-import App from '../App';
+import { usuarioStore } from '../Store/authstore'
 import {
   createRootRoute,
   createRoute,
   createRouter,
+  Outlet,
   redirect
 } from '@tanstack/react-router'
 import { lazy } from 'react'
 
 const RootRoute = createRootRoute({
-  component: App, 
+  component: () => <Outlet/>, 
 });
 
 const LoginRoute = createRoute({
   getParentRoute: () => RootRoute,
   path: '/login',
   component: lazy(() => import('../pages/Login')),
+    beforeLoad: () => {
+    if (usuarioStore.state.autenticado)  throw redirect({  to: '/' })
+  },
 })
 
 const RegisterRoute = createRoute({
   getParentRoute: () => RootRoute,
   path: '/register',
   component: lazy(() => import('../pages/Register')),
+      beforeLoad: () => {
+    if (usuarioStore.state.autenticado)  throw redirect({  to: '/' })
+  },
+})
+const DasRouter = createRoute({
+  getParentRoute: () => RootRoute,
+  path: '/',
+  component: lazy(() => import('../pages/Dashboard')),
+      beforeLoad: () => {
+    if (!usuarioStore.state.autenticado)  throw redirect({  to: '/login' })
+  },
 })
 
-const PokemonRoute = createRoute({
-  getParentRoute: () => RootRoute,
+
+export const PokemonRoute = createRoute({
+  getParentRoute: () => DasRouter,
   path: '/pokemon',
   component: lazy(() => import('../pages/Pokemon')),
+  beforeLoad: () => {
+    if (!usuarioStore.state.autenticado)  throw redirect({  to: '/login' })
+  },
 })
 
-const ClimaRoute = createRoute({
-  getParentRoute: () => RootRoute,
+export const ClimaRoute = createRoute({
+  getParentRoute: () => DasRouter,
   path: '/clima',
   component: lazy(() => import('../pages/Clima')),
+  beforeLoad: () => {
+    if (!usuarioStore.state.autenticado) {
+      throw redirect({
+        to: '/login',
+      })
+    }
+  },
 })
-
 
 const NotFoundRoute = createRoute({
   getParentRoute: () => RootRoute,
@@ -50,6 +75,7 @@ const routeTree = RootRoute.addChildren([
   RegisterRoute,
   PokemonRoute,
   ClimaRoute,
+  DasRouter,
   NotFoundRoute,
 ])
 

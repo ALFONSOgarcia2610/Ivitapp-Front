@@ -1,13 +1,22 @@
 import * as React from 'react'
-import { Login } from '../sesiones/sesion' 
-import { useStore } from '@tanstack/react-store'
+import { Login } from '../sesiones/sesion'
 import { usuarioStore } from '../Store/authstore'
 import { useRouter } from '@tanstack/react-router'
-
+import { Link } from '@tanstack/react-router';
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 export default function LoginComponent() {
   const loginMutation = Login()
   const router = useRouter()
-  const auth = useStore(usuarioStore, (s) => s)
+
 
   const onFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault()
@@ -22,59 +31,69 @@ export default function LoginComponent() {
     console.log('🟢 Estado del store después del login:', usuarioStore.state)
 
     if (usuarioStore.state.autenticado) {
-      router.history.push('/') 
+      router.history.push('/')
     }
   }
 
   return (
-    <div className="p-2 grid gap-4 place-items-center">
-      <h3 className="text-xl font-semibold">Login</h3>
+    <div className="min-h-screen flex items-center justify-center">
+      <Card className="w-[350px]">
+        <CardHeader>
+          <CardTitle>INICIO DE SESION</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={onFormSubmit}>
+            <div className="grid w-full items-center gap-4">
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="username">USUARIO</Label>
+                <Input
+                  name="username"
+                  id="username"
+                  required
+                  className="border p-2 rounded"
+                  placeholder="Su Username"
+                />
+              </div>
 
-      <form onSubmit={onFormSubmit} className="grid gap-3 min-w-[300px]">
-        <div className="grid gap-1">
-          <label htmlFor="username">Username</label>
-          <input
-            name="username"
-            id="username"
-            required
-            className="border p-2 rounded"
-            placeholder="Your username"
-          />
-        </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="password">CONTRASEÑA</Label>
+                <Input
+                  name="password"
+                  id="password"
+                  type="password"
+                  required
+                  className="border p-2 rounded"
+                  placeholder="Su Contraseña"
+                />
+              </div>
+              <CardFooter className="flex justify-between">
+                <Button
+                  type="submit"
+                  disabled={loginMutation.isPending}
+                  className="bg-blue-500 text-white py-2 px-4 rounded disabled:bg-gray-400"
+                >
+                  {loginMutation.isPending ? 'Cargando...' : 'Iniciar'}
+                </Button>
+                <Link to="/register">
+                  <Button
+                    type="button"
+                    className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+                  >
+                    Registrar
+                  </Button>
 
-        <div className="grid gap-1">
-          <label htmlFor="password">Password</label>
-          <input
-            name="password"
-            id="password"
-            type="password"
-            required
-            className="border p-2 rounded"
-            placeholder="Your password"
-          />
-        </div>
+                </Link>
+              </CardFooter>
+              {loginMutation.isError && (
+                <p className="text-red-500">
+                  Error: {(loginMutation.error as Error).message}
+                </p>
+              )}
+            </div>
 
-        <button
-          type="submit"
-          disabled={loginMutation.isPending}
-          className="bg-blue-500 text-white py-2 px-4 rounded disabled:bg-gray-400"
-        >
-          {loginMutation.isPending ? 'Logging in...' : 'Login'}
-        </button>
-
-        {loginMutation.isError && (
-          <p className="text-red-500">
-            Error: {(loginMutation.error as Error).message}
-          </p>
-        )}
-      </form>
-
-      <div className="mt-4">
-        <p className="text-sm">Estado global:</p>
-        <pre className="text-xs bg-gray-100 p-2 rounded">
-          {JSON.stringify(auth, null, 2)}
-        </pre>
-      </div>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   )
 }
