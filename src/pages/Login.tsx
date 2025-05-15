@@ -90,7 +90,6 @@ export default function LoginComponent() {
                 </p>
               )}
             </div>
-
           </form>
         </CardContent>
       </Card>

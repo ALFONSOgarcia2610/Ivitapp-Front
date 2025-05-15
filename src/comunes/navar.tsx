@@ -65,7 +65,9 @@ export default function Navbar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
-              <ThemeSelector />
+              <div className="fixed top-4 right-4 z-50">
+                <ThemeSelector />
+              </div>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
