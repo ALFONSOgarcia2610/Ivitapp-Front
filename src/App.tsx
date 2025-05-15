@@ -1,4 +1,3 @@
-// src/App.tsx
 import './App.css';
 import { Outlet } from '@tanstack/react-router';
 import Navbar from './comunes/navar';

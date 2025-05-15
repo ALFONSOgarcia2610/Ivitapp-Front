@@ -1,9 +1,9 @@
-
 import App from '../App';
 import {
   createRootRoute,
   createRoute,
   createRouter,
+  redirect
 } from '@tanstack/react-router'
 import { lazy } from 'react'
 
@@ -36,16 +36,25 @@ const ClimaRoute = createRoute({
 })
 
 
+const NotFoundRoute = createRoute({
+  getParentRoute: () => RootRoute,
+  path: '*',
+  beforeLoad: () => {
+    throw redirect({ to: '/login' })
+  },
+  component: () => null,
+})
+
 const routeTree = RootRoute.addChildren([
   LoginRoute,
   RegisterRoute,
   PokemonRoute,
   ClimaRoute,
+  NotFoundRoute,
 ])
 
 export const router = createRouter({ routeTree })
 
-// Necesario para TypeScript
 declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router
