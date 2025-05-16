@@ -28,8 +28,6 @@ export default function LoginComponent() {
 
     await loginMutation.mutateAsync({ username, password })
 
-    console.log('🟢 Estado del store después del login:', usuarioStore.state)
-
     if (usuarioStore.state.autenticado) {
       router.history.push('/')
     }

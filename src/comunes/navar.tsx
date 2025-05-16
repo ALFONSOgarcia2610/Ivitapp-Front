@@ -8,6 +8,8 @@ import {
   Home,
   CircleChevronRight,
   CircleChevronLeft,
+  UserRoundPen,
+  MapPinned
 } from "lucide-react";
 import { Link, useRouter } from "@tanstack/react-router";
 import { cerrarSesion } from "../sesiones/sesion";
@@ -45,14 +47,14 @@ const items = [
   {
     title: "Editar Usuario",
     to: "/EditUser",
-    icon: RotateCcwKey,
+    icon: UserRoundPen,
   },
 ];
 
 export default function Navbar() {
   const router = useRouter();
   const [colapsado, setColapsado] = useState(true);
-  const provincia = useStore(usuarioStore, (state) => state.provincia);
+  const canton = useStore(usuarioStore, (state) => state.canton);
 
   const handleClick = async (item: any, e: React.MouseEvent) => {
     if (item.isLogout) {
@@ -61,8 +63,6 @@ export default function Navbar() {
       router.navigate({ to: item.to });
     }
   };
-
-  usuarioStore.subscribe
 
   return (
     <Sidebar className={`h-screen transition-all duration-300 ${colapsado ? "w-15" : "w-64"}`}>
@@ -93,7 +93,8 @@ export default function Navbar() {
 
             </SidebarGroupLabel>
             <SidebarGroupLabel className="flex items-center gap-2 text-sm">
-              {!colapsado && `PROVINCIA: ${provincia?.toUpperCase()}`}
+              <MapPinned className="w-5 h-5" />
+              {!colapsado && `CANTON: ${canton?.toUpperCase()}`}
             </SidebarGroupLabel>
 
             {!colapsado && <hr className="my-2 border-gray-300" />}
