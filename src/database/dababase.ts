@@ -65,3 +65,46 @@ export const changePassword = async ({
     throw error;
   }
 };
+
+export const editUserData = async ({
+  username,
+  currentPassword,
+  newNombre,
+  newApellido,
+  newProvincia,
+  newCanton,
+}: {
+  username: string
+  currentPassword: string
+  newNombre: string
+  newApellido: string
+  newProvincia: string
+  newCanton: string
+}) => {
+  try {
+    const response = await fetch(`${import.meta.env.VITE_DATABASE_URL}/edituser`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        currentPassword,
+        newNombre,
+        newApellido,
+        newProvincia,
+        newCanton,
+      }),
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw new Error(errorData.message || 'Error al editar datos del usuario')
+    }
+
+    return await response.json()
+  } catch (error) {
+    console.error('Error en editUserData:', error)
+    throw error
+  }
+}

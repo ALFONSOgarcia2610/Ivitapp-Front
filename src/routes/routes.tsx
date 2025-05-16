@@ -9,15 +9,15 @@ import {
 import { lazy } from 'react'
 
 const RootRoute = createRootRoute({
-  component: () => <Outlet/>, 
+  component: () => <Outlet />,
 });
 
 const LoginRoute = createRoute({
   getParentRoute: () => RootRoute,
   path: '/login',
   component: lazy(() => import('../pages/Login')),
-    beforeLoad: () => {
-    if (usuarioStore.state.autenticado)  throw redirect({  to: '/' })
+  beforeLoad: () => {
+    if (usuarioStore.state.autenticado) throw redirect({ to: '/' })
   },
 })
 
@@ -25,16 +25,16 @@ const RegisterRoute = createRoute({
   getParentRoute: () => RootRoute,
   path: '/register',
   component: lazy(() => import('../pages/Register')),
-      beforeLoad: () => {
-    if (usuarioStore.state.autenticado)  throw redirect({  to: '/' })
+  beforeLoad: () => {
+    if (usuarioStore.state.autenticado) throw redirect({ to: '/' })
   },
 })
 const DasRouter = createRoute({
   getParentRoute: () => RootRoute,
   path: '/',
   component: lazy(() => import('../pages/Dashboard')),
-      beforeLoad: () => {
-    if (!usuarioStore.state.autenticado)  throw redirect({  to: '/login' })
+  beforeLoad: () => {
+    if (!usuarioStore.state.autenticado) throw redirect({ to: '/login' })
   },
 })
 
@@ -44,7 +44,7 @@ export const PokemonRoute = createRoute({
   path: '/pokemon',
   component: lazy(() => import('../pages/Pokemon')),
   beforeLoad: () => {
-    if (!usuarioStore.state.autenticado)  throw redirect({  to: '/login' })
+    if (!usuarioStore.state.autenticado) throw redirect({ to: '/login' })
   },
 })
 
@@ -72,6 +72,19 @@ export const ContraseñaRoute = createRoute({
     }
   },
 })
+export const editRoute = createRoute({
+  getParentRoute: () => DasRouter,
+  path: '/EditUser',
+  component: lazy(() => import('../pages/editUser')),
+  beforeLoad: () => {
+    if (!usuarioStore.state.autenticado) {
+      throw redirect({
+        to: '/login',
+      })
+    }
+  },
+})
+
 
 const NotFoundRoute = createRoute({
   getParentRoute: () => RootRoute,
@@ -90,6 +103,7 @@ const routeTree = RootRoute.addChildren([
   DasRouter,
   NotFoundRoute,
   ContraseñaRoute,
+  editRoute,
 ])
 
 export const router = createRouter({ routeTree })

@@ -1,5 +1,5 @@
 import { usuarioStore } from '../Store/authstore'
-import { loginUser, registerUser, changePassword } from '../database/dababase'
+import { loginUser, registerUser, changePassword, editUserData } from '../database/dababase'
 import { useMutation } from '@tanstack/react-query'
 
 interface Credenciales {
@@ -12,11 +12,18 @@ interface ChangePasswordInput {
   newPassword: string
   confirmPassword: string
 }
+interface EditUserInput {
+  currentPassword: string
+  newNombre: string
+  newApellido: string
+  newProvincia: string
+  newCanton: string
+}
 
 export function Login() {
   return useMutation({
     mutationFn: async ({ username, password }: Credenciales) => {
-      const data = await loginUser({ username, password })
+      const data = await loginUser({ username, password, })
       return { ...data, username }
     },
     onSuccess: (data) => {
@@ -24,6 +31,10 @@ export function Login() {
         ...prev,
         usuario: data.username,
         autenticado: true,
+        nombre: data.nombre,
+        apellido: data.apellido,
+        provincia: data.provincia,
+        canton: data.canton
       }))
     },
     onError: () => {
@@ -66,17 +77,48 @@ export function ChangePassword() {
         throw new Error('La nueva contraseña y la confirmación no coinciden')
       }
 
-      if (!usuarioStore.state.usuario ) {
+      if (!usuarioStore.state.usuario) {
         throw new Error('No hay usuario autenticado')
       }
 
       const data = await changePassword({
-        username:  usuarioStore.state.usuario,
+        username: usuarioStore.state.usuario,
         currentPassword,
         newPassword,
       })
 
       return data
+    },
+  })
+}
+
+export function edituser() {
+  return useMutation({
+    mutationFn: async ({ currentPassword, newNombre, newApellido, newProvincia, newCanton }: EditUserInput) => {
+      if (!usuarioStore.state.usuario) {
+        throw new Error('No hay usuario autenticado')
+      }
+
+      const data = await editUserData({
+        username: usuarioStore.state.usuario,
+        currentPassword,
+        newNombre,
+        newApellido,
+        newProvincia,
+        newCanton,
+      })
+
+      return { ...data, username: usuarioStore.state.usuario }
+    },
+    onSuccess: (data) => {
+      usuarioStore.setState((prev) => ({
+        ...prev,
+        usuario: data.username,
+        autenticado: true,
+      }))
+    },
+    onError: () => {
+
     },
   })
 }
