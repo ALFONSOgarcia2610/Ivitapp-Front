@@ -45,7 +45,6 @@ export default function EditarPerfilComponent() {
                 newCanton,
             })
 
-            // ✅ Actualiza el store local solo después del éxito
             usuarioStore.setState((prev) => ({
                 ...prev,
                 nombre: newNombre,

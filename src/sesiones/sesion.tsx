@@ -67,6 +67,10 @@ export function cerrarSesion() {
     ...prev,
     usuario: null,
     autenticado: false,
+    nombre: null,
+    apellido: null,
+    canton: null,
+    provincia: null
   }))
 }
 

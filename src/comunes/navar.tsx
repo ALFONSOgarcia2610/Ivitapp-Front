@@ -1,16 +1,19 @@
 import {
-  User,
   LogOut,
   RotateCcwKey,
   TextSearch,
   CloudSun,
   Landmark,
-  Home,
   CircleChevronRight,
   CircleChevronLeft,
   UserRoundPen,
-  MapPinned
+  MapPinned,
 } from "lucide-react";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
 import { Link, useRouter } from "@tanstack/react-router";
 import { cerrarSesion } from "../sesiones/sesion";
 import { usuarioStore } from "../Store/authstore";
@@ -77,24 +80,23 @@ export default function Navbar() {
               )}
             </button>
             {!colapsado && (
-              <span className="text-lg"> <Home className="w-6 h-6 text-primary" /></span>
+              <span className="text-lg"><Landmark className="w-6 h-6 text-primary" /></span>
             )}
           </div>
 
           <SidebarGroup>
-            <SidebarGroupLabel className="flex items-center gap-2 text-lg font-semibold">
-              <Landmark className="w-6 h-6" />
-              {!colapsado && "COACMES"}
-            </SidebarGroupLabel>
-
             <SidebarGroupLabel className="flex items-center gap-2 text-sm">
-              <User className="w-5 h-5" />
-              {!colapsado && `USUARIO: ${usuarioStore.state.usuario?.toUpperCase()}`}
+              <Avatar>
+                <AvatarImage src="/avatar.jpg" alt="@shadcn" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              {!colapsado && `${usuarioStore.state.usuario?.toUpperCase()}`}
 
             </SidebarGroupLabel>
+
             <SidebarGroupLabel className="flex items-center gap-2 text-sm">
               <MapPinned className="w-5 h-5" />
-              {!colapsado && `CANTON: ${canton?.toUpperCase()}`}
+              {!colapsado && `${canton?.toUpperCase()}`}
             </SidebarGroupLabel>
 
             {!colapsado && <hr className="my-2 border-gray-300" />}

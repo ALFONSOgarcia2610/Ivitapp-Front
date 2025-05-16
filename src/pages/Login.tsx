@@ -1,37 +1,49 @@
-import * as React from 'react'
-import { Login } from '../sesiones/sesion'
-import { usuarioStore } from '../Store/authstore'
-import { useRouter } from '@tanstack/react-router'
-import { Link } from '@tanstack/react-router';
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
+import * as React from "react";
+import { Login } from "../sesiones/sesion";
+import { usuarioStore } from "../Store/authstore";
+
+import { Link } from "@tanstack/react-router";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from '@tanstack/react-router'
+import { toast } from "sonner";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
+
 export default function LoginComponent() {
-  const loginMutation = Login()
-  const router = useRouter()
+  const loginMutation = Login();
+
+  const navigate = useNavigate()
 
 
   const onFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
-    evt.preventDefault()
-    const formData = new FormData(evt.currentTarget)
-    const username = formData.get('username')?.toString() || ''
-    const password = formData.get('password')?.toString() || ''
+    evt.preventDefault();
+    const formData = new FormData(evt.currentTarget);
+    const username = formData.get("username")?.toString() || "";
+    const password = formData.get("password")?.toString() || "";
 
-    if (!username || !password) return
+    if (!username || !password) return;
 
-    await loginMutation.mutateAsync({ username, password })
+    try {
+      await loginMutation.mutateAsync({ username, password });
 
-    if (usuarioStore.state.autenticado) {
-      router.history.push('/')
+      console.log("🟢 Estado del store después del login:", usuarioStore.state);
+
+      if (usuarioStore.state.autenticado) {
+        navigate({ to: "/" })
+      }
+    } catch (error) {
+      toast.error(`Error: ${(error as Error).message}`, {
+        position: "bottom-right",
+      });
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -70,7 +82,7 @@ export default function LoginComponent() {
                   disabled={loginMutation.isPending}
                   className="bg-blue-500 text-white py-2 px-4 rounded disabled:bg-gray-400"
                 >
-                  {loginMutation.isPending ? 'Cargando...' : 'Iniciar'}
+                  {loginMutation.isPending ? "Cargando..." : "Iniciar"}
                 </Button>
                 <Link to="/register">
                   <Button
@@ -79,18 +91,12 @@ export default function LoginComponent() {
                   >
                     Registrar
                   </Button>
-
                 </Link>
               </CardFooter>
-              {loginMutation.isError && (
-                <p className="text-red-500">
-                  Error: {(loginMutation.error as Error).message}
-                </p>
-              )}
             </div>
           </form>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
