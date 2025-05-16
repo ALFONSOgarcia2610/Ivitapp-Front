@@ -59,7 +59,6 @@ export function cerrarSesion() {
   }))
 }
 
-/** Nueva función para cambiar contraseña */
 export function ChangePassword() {
   return useMutation({
     mutationFn: async ({ currentPassword, newPassword, confirmPassword }: ChangePasswordInput) => {
