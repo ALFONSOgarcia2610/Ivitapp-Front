@@ -60,6 +60,18 @@ export const ClimaRoute = createRoute({
     }
   },
 })
+export const ContraseñaRoute = createRoute({
+  getParentRoute: () => DasRouter,
+  path: '/ChangePassword',
+  component: lazy(() => import('../pages/Contraseña')),
+  beforeLoad: () => {
+    if (!usuarioStore.state.autenticado) {
+      throw redirect({
+        to: '/login',
+      })
+    }
+  },
+})
 
 const NotFoundRoute = createRoute({
   getParentRoute: () => RootRoute,
@@ -77,6 +89,7 @@ const routeTree = RootRoute.addChildren([
   ClimaRoute,
   DasRouter,
   NotFoundRoute,
+  ContraseñaRoute,
 ])
 
 export const router = createRouter({ routeTree })

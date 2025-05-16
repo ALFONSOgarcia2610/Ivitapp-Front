@@ -1,7 +1,6 @@
-const API_URL = 'http://localhost:5000/api/auth';
 export const registerUser = async (username: string, password: string) => {
   try {
-    const response = await fetch(`${API_URL}/register`, {
+    const response = await fetch(`${import.meta.env.VITE_DATABASE_URL}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,7 +21,7 @@ export const registerUser = async (username: string, password: string) => {
 };
 
 export const loginUser = async ({ username, password }: { username: string; password: string }) => {
-  const response = await fetch(`${API_URL}/login`, {
+  const response = await fetch(`${import.meta.env.VITE_DATABASE_URL}/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -36,4 +35,33 @@ export const loginUser = async ({ username, password }: { username: string; pass
   }
 
   return await response.json();
+};
+export const changePassword = async ({
+  username,
+  currentPassword,
+  newPassword,
+}: {
+  username: string;
+  currentPassword: string;
+  newPassword: string;
+}) => {
+  try {
+    const response = await fetch(`${import.meta.env.VITE_DATABASE_URL}/changePassword`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, currentPassword, newPassword }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Error al cambiar la contraseña');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error en changePassword:', error);
+    throw error;
+  }
 };
