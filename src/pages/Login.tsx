@@ -36,7 +36,7 @@ export default function LoginComponent() {
       console.log("🟢 Estado del store después del login:", usuarioStore.state);
 
       if (usuarioStore.state.autenticado) {
-        navigate({ to: "/" })
+        navigate({ to: "/home" })
       }
     } catch (error) {
       toast.error(`Error: ${(error as Error).message}`, {

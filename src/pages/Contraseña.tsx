@@ -3,7 +3,7 @@ import { ChangePassword } from '../sesiones/sesion'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
-import { useRouter } from '@tanstack/react-router'
+import { useNavigate } from '@tanstack/react-router'
 import {
   Card,
   CardContent,
@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/card'
 
 export default function ChangePasswordComponent() {
-  const router = useRouter()
+  const navigate = useNavigate()
   const changePasswordMutation = ChangePassword()
   const [localError, setLocalError] = React.useState<string | null>(null)
   const [successMessage, setSuccessMessage] = React.useState<string | null>(null)
@@ -41,7 +41,7 @@ export default function ChangePasswordComponent() {
     try {
       await changePasswordMutation.mutateAsync({ currentPassword, newPassword, confirmPassword })
       setSuccessMessage('Contraseña cambiada con éxito.')
-      router.history.push('/')
+      navigate({ to: "/home" })
     } catch (error) {
       setLocalError((error as Error).message)
     }

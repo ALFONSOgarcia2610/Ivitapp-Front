@@ -4,7 +4,7 @@ import { usuarioStore } from '../Store/authstore'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
-import { useRouter } from '@tanstack/react-router'
+import { useNavigate } from '@tanstack/react-router'
 import {
     Card,
     CardContent,
@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/card'
 
 export default function EditarPerfilComponent() {
-    const router = useRouter()
+    const navigate = useNavigate()
     const editarUsuario = edituser()
     const [localError, setLocalError] = React.useState<string | null>(null)
     const [successMessage, setSuccessMessage] = React.useState<string | null>(null)
@@ -54,7 +54,7 @@ export default function EditarPerfilComponent() {
             }))
 
             setSuccessMessage('Datos actualizados correctamente.')
-            router.history.push('/')
+            navigate({ to: "/home" })
         } catch (error) {
             setLocalError((error as Error).message)
         }
