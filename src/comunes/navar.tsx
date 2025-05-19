@@ -13,11 +13,11 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/components/ui/avatar"
-import { Link, useRouter } from "@tanstack/react-router";
+} from "@/components/ui/avatar";
+import { Link, useRouter, useRouterState } from "@tanstack/react-router";
 import { cerrarSesion } from "../sesiones/sesion";
 import { usuarioStore } from "../Store/authstore";
-import { useStore } from '@tanstack/react-store'
+import { useStore } from "@tanstack/react-store";
 import { ThemeSelector } from "@/pages/components/selector-theme";
 import {
   Sidebar,
@@ -56,6 +56,9 @@ const items = [
 
 export default function Navbar() {
   const router = useRouter();
+  const currentPath = useRouterState({
+    select: (state) => state.location.pathname,
+  });
   const [colapsado, setColapsado] = useState(true);
   const canton = useStore(usuarioStore, (state) => state.canton);
 
@@ -87,11 +90,10 @@ export default function Navbar() {
           <SidebarGroup>
             <SidebarGroupLabel className="flex items-center gap-2 text-sm">
               <Avatar>
-                <AvatarImage src="/avatar.jpg" alt="@shadcn" />
+                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               {!colapsado && `${usuarioStore.state.usuario?.toUpperCase()}`}
-
             </SidebarGroupLabel>
 
             <SidebarGroupLabel className="flex items-center gap-2 text-sm">
@@ -103,20 +105,28 @@ export default function Navbar() {
 
             <SidebarGroupContent>
               <SidebarMenu>
-                {items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
-                      <Link to={item.to}>
-                        <item.icon className="w-5 h-5 mr-2" />
-                        {!colapsado && <span>{item.title}</span>}
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
+                {items.map((item) => {
+                  const isActive = currentPath === item.to;
+
+                  return (
+                    <SidebarMenuItem key={item.title}>
+                      <SidebarMenuButton
+                        asChild
+                        className={isActive ? "bg-primary text-white" : "hover:bg-muted"}
+                      >
+                        <Link to={item.to}>
+                          <item.icon className="w-5 h-5 mr-2" />
+                          {!colapsado && <span>{item.title}</span>}
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
         </div>
+
         <div>
           <SidebarMenu>
             <SidebarMenuItem>
@@ -137,6 +147,7 @@ export default function Navbar() {
           </SidebarMenu>
         </div>
       </SidebarContent>
+
       <div className="fixed top-4 right-4 z-50">
         <ThemeSelector />
       </div>

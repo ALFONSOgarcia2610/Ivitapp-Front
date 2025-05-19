@@ -39,7 +39,7 @@ const DasRouter = createRoute({
 })
 
 
-export const PokemonRoute = createRoute({
+const PokemonRoute = createRoute({
   getParentRoute: () => DasRouter,
   path: '/pokemon',
   component: lazy(() => import('../pages/Pokemon')),
@@ -48,7 +48,7 @@ export const PokemonRoute = createRoute({
   },
 })
 
-export const ClimaRoute = createRoute({
+const ClimaRoute = createRoute({
   getParentRoute: () => DasRouter,
   path: '/clima',
   component: lazy(() => import('../pages/Clima')),
@@ -61,7 +61,7 @@ export const ClimaRoute = createRoute({
   },
 })
 
-export const HomeRoute = createRoute({
+const HomeRoute = createRoute({
   getParentRoute: () => DasRouter,
   path: '/home',
   component: lazy(() => import('../pages/home')),
@@ -73,7 +73,7 @@ export const HomeRoute = createRoute({
     }
   },
 })
-export const ContraseñaRoute = createRoute({
+const ContraseñaRoute = createRoute({
   getParentRoute: () => DasRouter,
   path: '/ChangePassword',
   component: lazy(() => import('../pages/Contraseña')),
@@ -85,7 +85,7 @@ export const ContraseñaRoute = createRoute({
     }
   },
 })
-export const editRoute = createRoute({
+const editRoute = createRoute({
   getParentRoute: () => DasRouter,
   path: '/EditUser',
   component: lazy(() => import('../pages/editUser')),
