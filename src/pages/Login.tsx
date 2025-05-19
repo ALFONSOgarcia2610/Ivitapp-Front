@@ -18,9 +18,7 @@ import {
 
 export default function LoginComponent() {
   const loginMutation = Login();
-
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const onFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -32,11 +30,10 @@ export default function LoginComponent() {
 
     try {
       await loginMutation.mutateAsync({ username, password });
-
       console.log("🟢 Estado del store después del login:", usuarioStore.state);
 
       if (usuarioStore.state.autenticado) {
-        navigate({ to: "/home" })
+        navigate({ to: "/home" });
       }
     } catch (error) {
       toast.error(`Error: ${(error as Error).message}`, {
@@ -49,51 +46,52 @@ export default function LoginComponent() {
     <div className="min-h-screen flex items-center justify-center">
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle>INICIO DE SESION</CardTitle>
+          <CardTitle>INICIO DE SESIÓN</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={onFormSubmit}>
-            <div className="grid w-full items-center gap-4">
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="username">USUARIO</Label>
-                <Input
-                  name="username"
-                  id="username"
-                  required
-                  className="border p-2 rounded"
-                  placeholder="Su Username"
-                />
-              </div>
-
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="password">CONTRASEÑA</Label>
-                <Input
-                  name="password"
-                  id="password"
-                  type="password"
-                  required
-                  className="border p-2 rounded"
-                  placeholder="Su Contraseña"
-                />
-              </div>
-              <CardFooter className="flex justify-between">
-                <Button
-                  type="submit"
-                  disabled={loginMutation.isPending}
-                  className="bg-blue-500 text-white py-2 px-4 rounded disabled:bg-gray-400"
-                >
-                  {loginMutation.isPending ? "Cargando..." : "Iniciar"}
-                </Button>
-                <Link to="/register">
-                  <Button
-                    type="button"
-                    className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
-                  >
-                    Registrar
-                  </Button>
-                </Link>
-              </CardFooter>
+          <form onSubmit={onFormSubmit} className="grid w-full gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="username">USUARIO</Label>
+              <Input
+                name="username"
+                id="username"
+                required
+                className="border p-2 rounded"
+                placeholder="Su Username"
+              />
             </div>
+
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="password">CONTRASEÑA</Label>
+              <Input
+                name="password"
+                id="password"
+                type="password"
+                required
+                className="border p-2 rounded"
+                placeholder="Su Contraseña"
+              />
+            </div>
+
+            <CardFooter className="flex flex-col items-center">
+              <Button
+                type="submit"
+                disabled={loginMutation.isPending}
+                className="w-full"
+                variant={"inicio"}
+              >
+                {loginMutation.isPending ? "Cargando..." : "Iniciar"}
+              </Button>
+              <p className="mt-4 text-sm text-center">
+                ¿No tienes una cuenta?{' '}
+                <Link
+                  to="/register"
+                  className="font-medium text-blue-600 hover:underline"
+                >
+                  Regístrate aquí
+                </Link>
+              </p>
+            </CardFooter>
           </form>
         </CardContent>
       </Card>

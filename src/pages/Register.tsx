@@ -40,55 +40,56 @@ export default function RegisterComponent() {
                     <CardTitle>REGISTRO</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <form onSubmit={onFormSubmit}>
-                        <div className="grid w-full items-center gap-4">
-                            <div className="flex flex-col space-y-1.5">
-                                <Label htmlFor="username">USUARIO</Label>
-                                <Input
-                                    name="username"
-                                    id="username"
-                                    required
-                                    className="border p-2 rounded"
-                                    placeholder="Elija un nombre de usuario"
-                                />
-                            </div>
-
-                            <div className="flex flex-col space-y-1.5">
-                                <Label htmlFor="password">CONTRASEÑA</Label>
-                                <Input
-                                    name="password"
-                                    id="password"
-                                    type="password"
-                                    required
-                                    className="border p-2 rounded"
-                                    placeholder="Elija una contraseña"
-                                />
-                            </div>
-
-                            <CardFooter className="flex justify-between">
-                                <Button
-                                    type="submit"
-                                    disabled={registerMutation.isPending}
-                                    className="bg-blue-500 text-white py-2 px-4 rounded disabled:bg-gray-400"
-                                >
-                                    {registerMutation.isPending ? 'Cargando...' : 'Registrar'}
-                                </Button>
-                                <Link to="/login">
-                                    <Button
-                                        type="button"
-                                        className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
-                                    >
-                                        Inicio
-                                    </Button>
-                                </Link>
-                            </CardFooter>
-
-                            {registerMutation.isError && (
-                                <p className="text-red-500">
-                                    Error: {(registerMutation.error as Error).message}
-                                </p>
-                            )}
+                    <form onSubmit={onFormSubmit} className="grid w-full gap-4">
+                        <div className="flex flex-col space-y-1.5">
+                            <Label htmlFor="username">USUARIO</Label>
+                            <Input
+                                name="username"
+                                id="username"
+                                required
+                                className="border p-2 rounded"
+                                placeholder="Elija un nombre de usuario"
+                            />
                         </div>
+
+                        <div className="flex flex-col space-y-1.5">
+                            <Label htmlFor="password">CONTRASEÑA</Label>
+                            <Input
+                                name="password"
+                                id="password"
+                                type="password"
+                                required
+                                className="border p-2 rounded"
+                                placeholder="Elija una contraseña"
+                            />
+                        </div>
+
+                        <CardFooter className="flex flex-col items-center">
+                            <Button
+                                type="submit"
+                                disabled={registerMutation.isPending}
+                                className="w-full"
+                                variant={"inicio"}
+                            >
+                                {registerMutation.isPending ? 'Cargando...' : 'Registrar'}
+                            </Button>
+
+                            <p className="mt-4 text-sm text-center">
+                                ¿Ya tienes una cuenta?{' '}
+                                <Link
+                                    to="/login"
+                                    className="font-medium text-blue-600 hover:underline"
+                                >
+                                    Inicia sesión aquí
+                                </Link>
+                            </p>
+                        </CardFooter>
+
+                        {registerMutation.isError && (
+                            <p className="text-red-500 text-center">
+                                Error: {(registerMutation.error as Error).message}
+                            </p>
+                        )}
                     </form>
                 </CardContent>
             </Card>

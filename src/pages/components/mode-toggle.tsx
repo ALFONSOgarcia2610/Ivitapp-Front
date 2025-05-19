@@ -16,7 +16,7 @@ export function ModeToggle() {
       variant="outline"
       size="icon"
       onClick={toggleMode}
-      className="flex items-center justify-center"
+      className="flex items-center justify-center rounded-full"
     >
       {modeTheme === "dark" ? (
         <Moon className="h-[1.2rem] w-[1.2rem]" />
