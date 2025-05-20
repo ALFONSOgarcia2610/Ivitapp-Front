@@ -36,7 +36,7 @@ export default function PokeComponent() {
 
     return (
 
-        <Card className="relative z-10 w-full max-w-3xl shadow-lg">
+        <Card className="relative w-full max-w-3xl shadow-lg">
             <CardHeader className="flex flex-col items-center">
                 <CardTitle className="text-center text-2xl font-bold">
                     POKEDEX

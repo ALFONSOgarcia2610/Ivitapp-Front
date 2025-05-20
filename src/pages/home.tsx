@@ -8,6 +8,7 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel"
 
+
 export default function home() {
     return (
         <Carousel className="w-full max-w-xs">

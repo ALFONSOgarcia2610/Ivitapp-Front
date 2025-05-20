@@ -4,7 +4,8 @@ import { getClimaByCity } from "../apis/climapi";
 import { Thermometer, Wind, MapPin } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
-
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 export default function Clima() {
     const [city, setCity] = useState("");
 
@@ -30,12 +31,12 @@ export default function Clima() {
             });
             return;
         }
-        refetch(); // Ejecuta la consulta
+        refetch(); 
     };
 
     return (
         <div className="relative flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-4">
-            <Card className="relative z-10 w-full max-w-md shadow-lg">
+            <Card className="w-[350px]">
                 <CardHeader className="flex flex-col items-center">
 
                     <CardTitle className="text-center text-2xl font-bold">
@@ -43,21 +44,21 @@ export default function Clima() {
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <input
+                    <Input
                         type="text"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                         placeholder="Ingresa el nombre de una ciudad"
                         className="w-full p-2 border border-border rounded mb-4 bg-background text-foreground"
                     />
-                    <button
+                    <Button
                         onClick={handleSearch}
                         className="w-full bg-primary text-primary-foreground p-2 rounded hover:bg-primary/90"
                     >
                         Buscar
-                    </button>
+                    </Button>
                     {isLoading && (
-                        <button
+                        <Button
                             type="button"
                             className="bg-indigo-500 text-white px-4 py-2 rounded flex items-center gap-2 mt-4 mx-auto"
                             disabled
@@ -84,7 +85,7 @@ export default function Clima() {
                                 />
                             </svg>
                             Cargando
-                        </button>
+                        </Button>
                     )}
 
                     {data && (
