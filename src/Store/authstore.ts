@@ -7,6 +7,7 @@ interface UsuarioState {
     apellido: string | null;
     provincia: string | null;
     canton: string | null;
+    skeleton: boolean;
 }
 
 export const usuarioStore = new Store<UsuarioState>({
@@ -16,4 +17,5 @@ export const usuarioStore = new Store<UsuarioState>({
     apellido: null,
     provincia: null,
     canton: null,
+    skeleton: false,
 })

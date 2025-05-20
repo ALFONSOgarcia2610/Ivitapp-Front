@@ -38,7 +38,7 @@ import { useState } from "react";
 const items = [
   { title: "Pokedex", to: "/pokemon", icon: TextSearch },
   { title: "Clima", to: "/clima", icon: CloudSun },
-  { title: "Skeleton", to: "/skeleton", icon: CloudSun },
+  { title: "Home", to: "/home", icon: CloudSun },
   { title: "Cambiar Contraseña", to: "/ChangePassword", icon: RotateCcwKey },
   { title: "Editar Usuario", to: "/EditUser", icon: UserRoundPen },
 ];

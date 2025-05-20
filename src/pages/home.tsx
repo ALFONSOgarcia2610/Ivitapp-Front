@@ -1,32 +1,41 @@
+import { useState, useEffect } from "react";
+import SkeletonCards from "./skeleton";
+import FilledCards from "./FilledCards";
 
-import { Card, CardContent } from "@/components/ui/card"
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel"
+export default function HomePage() {
 
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        async function fetchData() {
+            await new Promise((resolve) => setTimeout(resolve, 0));
+            setLoading(false);
+            localStorage.setItem("skeletonShown", "true");
+        }
+        fetchData();
+    }, []);
 
-export default function home() {
     return (
-        <Carousel className="w-full max-w-xs">
-            <CarouselContent>
-                {Array.from({ length: 5 }).map((_, index) => (
-                    <CarouselItem key={index}>
-                        <div className="p-1">
-                            <Card>
-                                <CardContent className="flex aspect-square items-center justify-center p-6">
-                                    <span className="text-4xl font-semibold">{index + 1}</span>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    </CarouselItem>
-                ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-        </Carousel>
-    )
+        <div className="p-4 relative">
+            <div
+                style={{
+                    position: "absolute",
+                    width: "100%",
+                    transition: "opacity 0.5s ease",
+                    opacity: loading ? 1 : 0,
+                    pointerEvents: loading ? "auto" : "none",
+                }}
+            >
+                <SkeletonCards />
+            </div>
+            <div
+                style={{
+                    transition: "opacity 0.5s ease",
+                    opacity: loading ? 0 : 1,
+                    pointerEvents: loading ? "none" : "auto",
+                }}
+            >
+                <FilledCards />
+            </div>
+        </div>
+    );
 }

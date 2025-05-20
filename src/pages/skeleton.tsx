@@ -27,14 +27,21 @@ export default function SkeletonCards() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-                <div className="col-span-1">
+                <div className="col-span-1 p-1">
                     <div className="grid grid-cols-2 gap-4">
                         <Skeleton className="h-10 w-full" />
+                        <div className="grid grid-cols-2 gap-4">
+                            <Skeleton className="h-10 w-full" />
+                            <Skeleton className="h-10 w-full" />
+                        </div>
+
                     </div>
+
                 </div>
-                <div className="col-span-1">
+                <div className="col-span-1 p-1">
                     <div className="grid grid-cols-4 gap-4">
-                        <Skeleton className="h-10 w-full col-end-3" />
+                        <Skeleton className="h-10 w-full" />
+                        <Skeleton className="h-10 w-full" />
                         <Skeleton className="h-10 w-full" />
                         <Skeleton className="h-10 w-full" />
                     </div>

@@ -70,8 +70,10 @@ export function cerrarSesion() {
     nombre: null,
     apellido: null,
     canton: null,
-    provincia: null
+    provincia: null,
+    skeleton: false
   }))
+  localStorage.removeItem("skeletonShown");
 }
 
 export function ChangePassword() {
