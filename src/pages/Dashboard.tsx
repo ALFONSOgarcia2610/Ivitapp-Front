@@ -11,10 +11,7 @@ export default function Das() {
     <ActiveThemeProvider initialColor="blue" initialMode="light">
       <SidebarProvider>
         <Navbar />
-
-
         <Outlet />
-
       </SidebarProvider>
     </ActiveThemeProvider>
   )
