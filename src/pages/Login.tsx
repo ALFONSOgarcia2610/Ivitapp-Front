@@ -6,8 +6,7 @@ import { Link } from "@tanstack/react-router";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from '@tanstack/react-router'
-import { toast } from "sonner";
+import { useNavigate } from "@tanstack/react-router";
 import {
   Card,
   CardContent,
@@ -20,6 +19,25 @@ export default function LoginComponent() {
   const loginMutation = Login();
   const navigate = useNavigate();
 
+  const [username, setUsername] = React.useState("");
+  const [capsLockOn, setCapsLockOn] = React.useState(false);
+  const [passwordFocused, setPasswordFocused] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleKeyEvent = (e: KeyboardEvent) => {
+      const caps = e.getModifierState && e.getModifierState("CapsLock");
+      setCapsLockOn(caps);
+    };
+
+    window.addEventListener("keydown", handleKeyEvent);
+    window.addEventListener("keyup", handleKeyEvent);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyEvent);
+      window.removeEventListener("keyup", handleKeyEvent);
+    };
+  }, []);
+
   const onFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     const formData = new FormData(evt.currentTarget);
@@ -30,20 +48,36 @@ export default function LoginComponent() {
 
     try {
       await loginMutation.mutateAsync({ username, password });
-      console.log("🟢 Estado del store después del login:", usuarioStore.state);
-
       if (usuarioStore.state.autenticado) {
         navigate({ to: "/home" });
       }
     } catch (error) {
-      toast.error(`Error: ${(error as Error).message}`, {
-        position: "bottom-right",
-      });
+      console.error(error);
     }
   };
 
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value.toLowerCase();
+    const soloLetras = input.replace(/[^a-z]/g, "");
+    setUsername(soloLetras);
+  };
+
+  const handlePasswordKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const caps = e.getModifierState("CapsLock");
+    setCapsLockOn(caps);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 relative">
+      {capsLockOn && passwordFocused && (
+        <div
+          className="fixed top-[120px] left-1/2 -translate-x-1/2 px-5 py-3 bg-yellow-50 border border-yellow-300 text-yellow-900 font-semibold rounded-lg shadow-md z-50 select-none"
+          role="alert"
+        >
+          ⚠️ Bloq Mayús está activado
+        </div>
+      )}
+
       <Card className="w-[350px]">
         <CardHeader>
           <CardTitle>INICIO DE SESIÓN</CardTitle>
@@ -58,6 +92,9 @@ export default function LoginComponent() {
                 required
                 className="border p-2 rounded"
                 placeholder="Su Username"
+                value={username}
+                onChange={handleUsernameChange}
+                autoComplete="username"
               />
             </div>
 
@@ -70,6 +107,10 @@ export default function LoginComponent() {
                 required
                 className="border p-2 rounded"
                 placeholder="Su Contraseña"
+                onKeyDown={handlePasswordKeyDown}
+                onFocus={() => setPasswordFocused(true)}
+                onBlur={() => setPasswordFocused(false)}
+                autoComplete="current-password"
               />
             </div>
 
@@ -83,7 +124,7 @@ export default function LoginComponent() {
                 {loginMutation.isPending ? "Cargando..." : "Iniciar"}
               </Button>
               <p className="mt-4 text-sm text-center">
-                ¿No tienes una cuenta?{' '}
+                ¿No tienes una cuenta?{" "}
                 <Link
                   to="/register"
                   className="font-medium text-blue-600 hover:underline"

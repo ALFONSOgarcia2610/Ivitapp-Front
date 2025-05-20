@@ -48,6 +48,15 @@ const PokemonRoute = createRoute({
   },
 })
 
+const SkeletonRoute = createRoute({
+  getParentRoute: () => DasRouter,
+  path: '/skeleton',
+  component: lazy(() => import('../pages/skeleton')),
+  beforeLoad: () => {
+    if (!usuarioStore.state.autenticado) throw redirect({ to: '/login' })
+  },
+})
+
 const ClimaRoute = createRoute({
   getParentRoute: () => DasRouter,
   path: '/clima',
@@ -117,7 +126,8 @@ const routeTree = RootRoute.addChildren([
   NotFoundRoute,
   ContraseñaRoute,
   editRoute,
-  HomeRoute
+  HomeRoute,
+  SkeletonRoute
 ])
 
 export const router = createRouter({ routeTree })

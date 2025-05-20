@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+// import { useState, useEffect, useRef } from "react";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -13,7 +13,7 @@ import {
 import { useThemeConfig } from "@/providers/active-theme.provider";
 import { ModeToggle } from "./mode-toggle";
 
-import { motion, AnimatePresence } from "framer-motion";
+// import { motion, AnimatePresence } from "framer-motion";
 
 const COLOR_THEMES = [
   { name: "Default", value: "default", color: "#f5f5f5" },
@@ -30,29 +30,29 @@ export function ThemeSelector() {
   const { colorTheme, setColorTheme } = useThemeConfig();
   const currentColor = COLOR_THEMES.find((theme) => theme.value === colorTheme);
 
-  const [animatingColor, setAnimatingColor] = useState<string | null>(null);
+  // const [animatingColor, setAnimatingColor] = useState<string | null>(null);
 
   // Referencia para guardar el color previo y evitar animación en la carga inicial
-  const prevColorTheme = useRef<string | null>(null);
+  // const prevColorTheme = useRef<string | null>(null);
 
-  useEffect(() => {
-    if (!currentColor) return;
+  // useEffect(() => {
+  //   if (!currentColor) return;
 
-    // En la primera carga guardamos el color pero no animamos
-    if (prevColorTheme.current === null) {
-      prevColorTheme.current = colorTheme;
-      return;
-    }
+  //   // En la primera carga guardamos el color pero no animamos
+  //   if (prevColorTheme.current === null) {
+  //     prevColorTheme.current = colorTheme;
+  //     return;
+  //   }
 
-    // Solo animar si el colorTheme cambia respecto al previo
-    if (prevColorTheme.current !== colorTheme) {
-      setAnimatingColor(currentColor.color);
-      prevColorTheme.current = colorTheme;
+  //   // Solo animar si el colorTheme cambia respecto al previo
+  //   if (prevColorTheme.current !== colorTheme) {
+  //     setAnimatingColor(currentColor.color);
+  //     prevColorTheme.current = colorTheme;
 
-      const timeout = setTimeout(() => setAnimatingColor(null), 1000);
-      return () => clearTimeout(timeout);
-    }
-  }, [colorTheme, currentColor]);
+  //     const timeout = setTimeout(() => setAnimatingColor(null), 1000);
+  //     return () => clearTimeout(timeout);
+  //   }
+  // }, [colorTheme, currentColor]);
 
   return (
     <div className="relative flex gap-2 items-center">
@@ -93,7 +93,7 @@ export function ThemeSelector() {
         </Select>
 
         {/* Animación de círculo */}
-        <AnimatePresence>
+        {/* <AnimatePresence>
           {animatingColor && (
             <motion.span
               key="anim-circle"
@@ -107,7 +107,7 @@ export function ThemeSelector() {
               className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full pointer-events-none z-10"
             />
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
       </div>
 
       <ModeToggle />
