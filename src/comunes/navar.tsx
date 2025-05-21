@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import {
   LogOut,
   RotateCcwKey,
@@ -9,8 +10,6 @@ import {
   CircleChevronLeft,
   UserRoundPen,
   MapPinned,
-  Menu,
-  X,
   LayoutDashboard,
 } from "lucide-react";
 
@@ -19,11 +18,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar";
-import { Link, useRouter, useRouterState } from "@tanstack/react-router";
-import { cerrarSesion } from "../sesiones/sesion";
-import { usuarioStore } from "../Store/authstore";
-import { useStore } from "@tanstack/react-store";
-import { ThemeSelector } from "@/pages/components/selector-theme";
+
 import {
   Sidebar,
   SidebarContent,
@@ -34,7 +29,20 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
+import { Link, useRouter, useRouterState } from "@tanstack/react-router";
+import { cerrarSesion } from "../sesiones/sesion";
+import { usuarioStore } from "../Store/authstore";
+import { useStore } from "@tanstack/react-store";
+import { ThemeSelector } from "@/pages/components/selector-theme";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const items = [
   { title: "Home", to: "/home", icon: LayoutDashboard },
@@ -54,7 +62,6 @@ export default function Navbar() {
   const usuario = useStore(usuarioStore, (state) => state.usuario);
 
   const [colapsado, setColapsado] = useState(true);
-  const [sidebarVisible, setSidebarVisible] = useState(false);
 
   const handleClick = async (item: any, e: React.MouseEvent) => {
     if (item.isLogout) {
@@ -66,94 +73,76 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Botón toggle solo en móviles */}
-      <button
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-muted rounded-full shadow-md"
-        onClick={() => setSidebarVisible(!sidebarVisible)}
-      >
-        {sidebarVisible ? <X /> : <Menu />}
-      </button>
+      {/* Botón toggle en móviles */}
+      <div className="lg:hidden fixed top-4 left-4 z-50">
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button size="icon" variant="outline">
+              <Landmark className="w-5 h-5" />
+            </Button>
+          </SheetTrigger>
 
-      {/* Sidebar en móviles */}
-      {sidebarVisible && (
-        <Sidebar
-          className={`fixed top-0 left-0 z-40 h-screen bg-background shadow-md transition-all duration-300 ${colapsado ? "w-16" : "w-64"
-            }`}
-        >
-          <SidebarContent className="flex flex-col justify-between h-full">
-            <div>
-              <div className="flex items-center justify-between px-4 py-3">
-                <button onClick={() => setColapsado(!colapsado)}>
-                  {colapsado ? (
-                    <CircleChevronRight className="w-6 h-6 text-primary" />
-                  ) : (
-                    <CircleChevronLeft className="w-6 h-6 text-primary" />
-                  )}
-                </button>
-                {!colapsado && (
-                  <span className="text-lg">
-                    <Landmark className="w-6 h-6 text-primary" />
-                  </span>
-                )}
+          <SheetContent side="left" className="p-0 w-64">
+            <SidebarContent className="h-full flex flex-col justify-between">
+              <div>
+                <SidebarGroup>
+                  <SidebarGroupLabel className="flex items-center gap-2 text-sm px-4 pt-4">
+                    <Avatar>
+                      <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                    {usuario?.toUpperCase()}
+                  </SidebarGroupLabel>
+
+                  <SidebarGroupLabel className="flex items-center gap-2 text-sm px-4">
+                    <MapPinned className="w-5 h-5" />
+                    {canton?.toUpperCase()}
+                  </SidebarGroupLabel>
+
+                  <hr className="my-2 mx-4 border-gray-300" />
+
+                  <SidebarGroupContent>
+                    <SidebarMenu>
+                      {items.map((item) => {
+                        const isActive = currentPath === item.to;
+                        return (
+                          <SidebarMenuItem key={item.title}>
+                            <SidebarMenuButton
+                              asChild
+                              className={isActive ? "bg-primary text-white" : "hover:bg-muted"}
+                            >
+                              <Link to={item.to}>
+                                <item.icon className="w-5 h-5 mr-2" />
+                                <span>{item.title}</span>
+                              </Link>
+                            </SidebarMenuButton>
+                          </SidebarMenuItem>
+                        );
+                      })}
+                    </SidebarMenu>
+                  </SidebarGroupContent>
+                </SidebarGroup>
               </div>
 
-              <SidebarGroup>
-                <SidebarGroupLabel className="flex items-center gap-2 text-sm">
-                  <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
-                  {!colapsado && usuario?.toUpperCase()}
-                </SidebarGroupLabel>
-
-                <SidebarGroupLabel className="flex items-center gap-2 text-sm">
-                  <MapPinned className="w-5 h-5" />
-                  {!colapsado && canton?.toUpperCase()}
-                </SidebarGroupLabel>
-
-                {!colapsado && <hr className="my-2 border-gray-300" />}
-
-                <SidebarGroupContent>
-                  <SidebarMenu>
-                    {items.map((item) => {
-                      const isActive = currentPath === item.to;
-                      return (
-                        <SidebarMenuItem key={item.title}>
-                          <SidebarMenuButton
-                            asChild
-                            className={isActive ? "bg-primary text-white" : "hover:bg-muted"}
-                          >
-                            <Link to={item.to}>
-                              <item.icon className="w-5 h-5 mr-2" />
-                              {!colapsado && <span>{item.title}</span>}
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                      );
-                    })}
-                  </SidebarMenu>
-                </SidebarGroupContent>
-              </SidebarGroup>
-            </div>
-
-            <div>
-              <SidebarMenu>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild>
-                    <Link
-                      to="/login"
-                      onClick={(e) => handleClick({ isLogout: true, to: "/login" }, e)}
-                    >
-                      <LogOut className="w-5 h-5 mr-2 text-red-500" />
-                      {!colapsado && <span className="text-red-500">Cerrar sesión</span>}
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              </SidebarMenu>
-            </div>
-          </SidebarContent>
-        </Sidebar>
-      )}
+              <div>
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <Link
+                        to="/login"
+                        onClick={(e) => handleClick({ isLogout: true, to: "/login" }, e)}
+                      >
+                        <LogOut className="w-5 h-5 mr-2 text-red-500" />
+                        <span className="text-red-500">Cerrar sesión</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </div>
+            </SidebarContent>
+          </SheetContent>
+        </Sheet>
+      </div>
 
       {/* Sidebar en pantallas grandes */}
       <Sidebar
@@ -234,7 +223,7 @@ export default function Navbar() {
         </SidebarContent>
       </Sidebar>
 
-      {/* ThemeSelector */}
+      {/* Theme selector */}
       <div className="fixed top-4 right-4 z-50">
         <ThemeSelector />
       </div>

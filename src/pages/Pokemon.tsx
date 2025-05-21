@@ -9,7 +9,12 @@ import { toast } from "sonner";
 export default function Pokemon() {
     const [pokemon, setPokemon] = useState("");
 
-    const { data: pokemonData, error, isLoading, refetch } = useQuery({
+    const {
+        data: pokemonData,
+        error,
+        isLoading,
+        refetch,
+    } = useQuery({
         queryKey: ["pokemon", pokemon],
         queryFn: () => getPokemonData(pokemon.toLowerCase()),
         enabled: false,
@@ -38,10 +43,10 @@ export default function Pokemon() {
             <CardHeader className="flex flex-col items-center">
                 <CardTitle className="text-center text-2xl font-bold">POKEDEX</CardTitle>
             </CardHeader>
+
             <CardContent>
-                <div className="grid grid-cols-2 gap-6">
-                    {/* Columna 1: Input y botón */}
-                    <div className="flex flex-col justify-start space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="flex flex-col space-y-4">
                         <Input
                             type="text"
                             value={pokemon}
@@ -55,6 +60,7 @@ export default function Pokemon() {
                         >
                             Buscar
                         </Button>
+
                         {isLoading && (
                             <Button
                                 type="button"
@@ -87,52 +93,48 @@ export default function Pokemon() {
                         )}
                     </div>
 
-                    {/* Columna 2: Resultado */}
-                    <div className="flex justify-center items-center">
+                    <div className="flex justify-center items-center w-full">
                         {pokemonData ? (
-                            <div className="overflow-hidden rounded-xl bg-card text-card-foreground shadow-md max-w-md w-full flex">
-                                <div className="md:flex items-center w-full">
-                                    {/* Imagen del Pokémon */}
-                                    <div className="md:shrink-0 bg-muted flex items-center justify-center">
-                                        <img
-                                            className="h-48 w-full object-contain md:h-full md:w-48"
-                                            src={pokemonData.sprites.front_default}
-                                            alt={`Sprite de ${pokemonData.name}`}
-                                        />
+                            <div className="overflow-hidden rounded-xl bg-card text-card-foreground shadow-md w-full max-w-xl flex flex-col md:flex-row">
+                                <div className="flex items-center justify-center p-4 bg-secondary md:w-1/3">
+                                    <img
+                                        className="h-32 w-32 object-contain"
+                                        src={pokemonData.sprites.front_default}
+                                        alt={`Sprite de ${pokemonData.name}`}
+                                    />
+                                </div>
+                                <div className="p-6 text-center md:text-left flex-1">
+                                    <div className="text-sm font-semibold tracking-wide text-primary uppercase">
+                                        {pokemonData.name}
                                     </div>
-
-                                    {/* Datos del Pokémon */}
-                                    <div className="p-6 text-center w-full">
-                                        <div className="text-sm font-semibold tracking-wide text-primary uppercase">
-                                            {pokemonData.name}
-                                        </div>
-                                        <p className="mt-2">
-                                            Altura:{" "}
-                                            <span className="text-primary font-medium">{pokemonData.height}</span>
-                                        </p>
-                                        <p className="mt-2">
-                                            Peso:{" "}
-                                            <span className="text-primary font-medium">{pokemonData.weight}</span>
-                                        </p>
-                                        <p className="mt-2">
-                                            Tipo(s):{" "}
-                                            <span className="text-primary font-medium">
-                                                {pokemonData.types.map((type: any) => type.type.name).join(", ")}
-                                            </span>
-                                        </p>
-                                        <p className="mt-2">
-                                            Habilidades:{" "}
-                                            <span className="text-primary font-medium">
-                                                {pokemonData.abilities
-                                                    .map((ability: any) => ability.ability.name)
-                                                    .join(", ")}
-                                            </span>
-                                        </p>
-                                    </div>
+                                    <p className="mt-2">
+                                        Altura:{" "}
+                                        <span className="text-primary font-medium">{pokemonData.height}</span>
+                                    </p>
+                                    <p className="mt-2">
+                                        Peso:{" "}
+                                        <span className="text-primary font-medium">{pokemonData.weight}</span>
+                                    </p>
+                                    <p className="mt-2">
+                                        Tipo(s):{" "}
+                                        <span className="text-primary font-medium">
+                                            {pokemonData.types.map((type: any) => type.type.name).join(", ")}
+                                        </span>
+                                    </p>
+                                    <p className="mt-2">
+                                        Habilidades:{" "}
+                                        <span className="text-primary font-medium">
+                                            {pokemonData.abilities
+                                                .map((ability: any) => ability.ability.name)
+                                                .join(", ")}
+                                        </span>
+                                    </p>
                                 </div>
                             </div>
                         ) : (
-                            <p className="text-muted-foreground">Aquí se mostrará la información del Pokémon</p>
+                            <p className="text-muted-foreground text-center">
+                                Aquí se mostrará la información del Pokémon
+                            </p>
                         )}
                     </div>
                 </div>
