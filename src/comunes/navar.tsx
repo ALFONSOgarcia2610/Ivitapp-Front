@@ -11,6 +11,7 @@ import {
   MapPinned,
   Menu,
   X,
+  LayoutDashboard,
 } from "lucide-react";
 
 import {
@@ -36,9 +37,9 @@ import {
 import { useState } from "react";
 
 const items = [
+  { title: "Home", to: "/home", icon: LayoutDashboard },
   { title: "Pokedex", to: "/pokemon", icon: TextSearch },
   { title: "Clima", to: "/clima", icon: CloudSun },
-  { title: "Home", to: "/home", icon: CloudSun },
   { title: "Cambiar Contraseña", to: "/ChangePassword", icon: RotateCcwKey },
   { title: "Editar Usuario", to: "/EditUser", icon: UserRoundPen },
 ];

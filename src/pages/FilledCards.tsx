@@ -1,7 +1,8 @@
+import Pokemon from "@/pages/Pokemon"
+import Clima from "@/pages/Clima"
 export default function FilledCards() {
     return (
         <div className="">
-            {/* 1. Cards principales */}
             <div className="grid grid-cols-4 gap-4">
                 {[...Array(4)].map((_, i) => (
                     <div key={i} className="">
@@ -46,18 +47,13 @@ export default function FilledCards() {
             </div>
 
             {/* 3. Card grande */}
-            <div className="grid grid-cols-1 gap-4 mt-4">
-                <div className="p-1">
-                    <div className="h-60 w-full bg-secondary flex items-center justify-center rounded">
-                        Gráfico o contenido principal
-                    </div>
-                </div>
+            <div className="h-80 grid grid-cols-1 gap-4 mt-4 ">
+                <Pokemon />
             </div>
-
             {/* 4. Información expandida */}
             <div className="grid grid-cols-3 items-center gap-4 p-1 mt-4">
-                <div className="h-50 w-full bg-muted rounded flex items-center justify-center">
-                    Imagen
+                <div className="h-full w-full rounded overflow-hidden">
+                    <Clima defaultCity="San Jacinto" hideSearch />
                 </div>
                 <div className="grid gap-1 col-span-2">
                     {[...Array(9)].map((_, i) => (

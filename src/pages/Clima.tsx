@@ -4,15 +4,21 @@ import { getClimaByCity } from "../apis/climapi";
 import { Thermometer, Wind, MapPin } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-export default function Clima() {
-    const [city, setCity] = useState("");
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
+type ClimaProps = {
+    defaultCity?: string;
+    hideSearch?: boolean;
+};
+
+export default function Clima({ defaultCity = "", hideSearch = false }: ClimaProps) {
+    const [city, setCity] = useState(defaultCity);
 
     const { data, error, isLoading, refetch } = useQuery({
         queryKey: ["clima", city],
         queryFn: () => getClimaByCity(city),
-        enabled: false,
+        enabled: !!defaultCity,
     });
 
     useEffect(() => {
@@ -31,81 +37,54 @@ export default function Clima() {
             });
             return;
         }
-        refetch(); 
+        refetch();
     };
 
     return (
-        <div className="relative flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-4">
-            <Card className="w-[350px]">
-                <CardHeader className="flex flex-col items-center">
-
-                    <CardTitle className="text-center text-2xl font-bold">
-                        Consulta el Clima
-                    </CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <Input
-                        type="text"
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        placeholder="Ingresa el nombre de una ciudad"
-                        className="w-full p-2 border border-border rounded mb-4 bg-background text-foreground"
-                    />
-                    <Button
-                        onClick={handleSearch}
-                        className="w-full bg-primary text-primary-foreground p-2 rounded hover:bg-primary/90"
-                    >
-                        Buscar
-                    </Button>
-                    {isLoading && (
+        <Card className="w-full">
+            <CardHeader className="text-center px-4 py-2">
+                <CardTitle className="text-lg font-semibold">Clima</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+                {!hideSearch && (
+                    <>
+                        <Input
+                            type="text"
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                            placeholder="Ingresa el nombre de una ciudad"
+                            className="w-full border border-border rounded mb-4"
+                        />
                         <Button
-                            type="button"
-                            className="bg-indigo-500 text-white px-4 py-2 rounded flex items-center gap-2 mt-4 mx-auto"
-                            disabled
+                            onClick={handleSearch}
+                            className="w-full bg-primary text-primary-foreground p-2 rounded hover:bg-primary/90"
                         >
-                            <svg
-                                className="w-5 h-5 animate-spin motion-reduce:hidden"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                aria-hidden="true"
-                            >
-                                <circle
-                                    className="opacity-25"
-                                    cx="12"
-                                    cy="12"
-                                    r="10"
-                                    stroke="currentColor"
-                                    strokeWidth="4"
-                                />
-                                <path
-                                    className="opacity-75"
-                                    fill="currentColor"
-                                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                                />
-                            </svg>
-                            Cargando
+                            Buscar
                         </Button>
-                    )}
+                    </>
+                )}
 
-                    {data && (
-                        <div className="bg-card text-card-foreground shadow-md rounded-lg p-4 mt-4 space-y-3">
-                            <div className="flex items-center text-lg font-semibold">
-                                <MapPin className="mr-2 text-primary" />
-                                Ciudad: <span className="ml-1">{data.name}</span>
-                            </div>
-                            <div className="flex items-center text-lg font-semibold">
-                                <Thermometer className="mr-2 text-primary" />
-                                Temperatura: <span className="ml-1">{data.main.temp}°C</span>
-                            </div>
-                            <div className="flex items-center text-lg font-semibold">
-                                <Wind className="mr-2 text-primary" />
-                                Viento: <span className="ml-1">{data.wind.speed} km/h</span>
-                            </div>
+                {isLoading && (
+                    <div className="text-center text-sm text-muted-foreground">Cargando...</div>
+                )}
+
+                {data && (
+                    <div className="text-sm space-y-2">
+                        <div className="flex items-center">
+                            <MapPin className="mr-2 text-primary w-4 h-4" />
+                            <span>Ciudad: {data.name}</span>
                         </div>
-                    )}
-                </CardContent>
-            </Card>
-        </div>
+                        <div className="flex items-center">
+                            <Thermometer className="mr-2 text-primary w-4 h-4" />
+                            <span>Temperatura: {data.main.temp}°C</span>
+                        </div>
+                        <div className="flex items-center">
+                            <Wind className="mr-2 text-primary w-4 h-4" />
+                            <span>Viento: {data.wind.speed} km/h</span>
+                        </div>
+                    </div>
+                )}
+            </CardContent>
+        </Card>
     );
-};
+}
