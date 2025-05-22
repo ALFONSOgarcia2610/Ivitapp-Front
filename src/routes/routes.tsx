@@ -57,6 +57,15 @@ const SkeletonRoute = createRoute({
   },
 })
 
+const TableRoute = createRoute({
+  getParentRoute: () => DasRouter,
+  path: '/table',
+  component: lazy(() => import('../pages/table')),
+  beforeLoad: () => {
+    if (!usuarioStore.state.autenticado) throw redirect({ to: '/login' })
+  },
+})
+
 const ClimaRoute = createRoute({
   getParentRoute: () => DasRouter,
   path: '/clima',
@@ -127,7 +136,8 @@ const routeTree = RootRoute.addChildren([
   ContraseñaRoute,
   editRoute,
   HomeRoute,
-  SkeletonRoute
+  SkeletonRoute,
+  TableRoute
 ])
 
 export const router = createRouter({ routeTree })

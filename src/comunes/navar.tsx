@@ -11,6 +11,7 @@ import {
   UserRoundPen,
   MapPinned,
   LayoutDashboard,
+  Table,
 } from "lucide-react";
 
 import {
@@ -50,6 +51,7 @@ const items = [
   { title: "Clima", to: "/clima", icon: CloudSun },
   { title: "Cambiar Contraseña", to: "/ChangePassword", icon: RotateCcwKey },
   { title: "Editar Usuario", to: "/EditUser", icon: UserRoundPen },
+  { title: "Table", to: "/table", icon: Table },
 ];
 
 export default function Navbar() {
@@ -73,7 +75,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Botón toggle en móviles */}
       <div className="lg:hidden fixed top-4 left-4 z-50">
         <Sheet>
           <SheetTrigger asChild>
@@ -143,8 +144,6 @@ export default function Navbar() {
           </SheetContent>
         </Sheet>
       </div>
-
-      {/* Sidebar en pantallas grandes */}
       <Sidebar
         className={`hidden lg:flex fixed top-0 left-0 h-screen bg-background shadow-md transition-all duration-300 ${colapsado ? "w-16" : "w-64"
           }`}
@@ -222,8 +221,6 @@ export default function Navbar() {
           </div>
         </SidebarContent>
       </Sidebar>
-
-      {/* Theme selector */}
       <div className="fixed top-4 right-4 z-50">
         <ThemeSelector />
       </div>
