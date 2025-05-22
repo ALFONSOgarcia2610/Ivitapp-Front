@@ -67,7 +67,7 @@ export default function FilledCards() {
             {/* Clima + líneas */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start mt-4">
                 <div className="w-full overflow-hidden">
-                    <Clima defaultCity="San Jacinto" hideSearch />
+                    <Clima defaultCity="Rocafuerte" hideSearch />
                 </div>
                 <div className="col-span-2 grid gap-1">
                     {[...Array(9)].map((_, i) => (

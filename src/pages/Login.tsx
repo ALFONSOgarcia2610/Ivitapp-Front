@@ -1,12 +1,9 @@
 import * as React from "react";
 import { Login } from "../sesiones/sesion";
-import { usuarioStore } from "../Store/authstore";
-
 import { Link } from "@tanstack/react-router";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "@tanstack/react-router";
 import {
   Card,
   CardContent,
@@ -17,7 +14,6 @@ import {
 
 export default function LoginComponent() {
   const loginMutation = Login();
-  const navigate = useNavigate();
 
   const [username, setUsername] = React.useState("");
   const [capsLockOn, setCapsLockOn] = React.useState(false);
@@ -46,14 +42,7 @@ export default function LoginComponent() {
 
     if (!username || !password) return;
 
-    try {
-      await loginMutation.mutateAsync({ username, password });
-      if (usuarioStore.state.autenticado) {
-        navigate({ to: "/home" });
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    loginMutation.mutate({ username, password });
   };
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {

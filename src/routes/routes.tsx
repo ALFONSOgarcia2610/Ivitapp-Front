@@ -17,7 +17,7 @@ const LoginRoute = createRoute({
   path: '/login',
   component: lazy(() => import('../pages/Login')),
   beforeLoad: () => {
-    if (usuarioStore.state.autenticado) throw redirect({ to: '/' })
+    if (usuarioStore.state.autenticado) throw redirect({ to: '/home' })
   },
 })
 

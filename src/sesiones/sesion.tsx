@@ -1,3 +1,4 @@
+import { useNavigate } from '@tanstack/react-router'
 import { usuarioStore } from '../Store/authstore'
 import { loginUser, registerUser, changePassword, editUserData } from '../database/dababase'
 import { useMutation } from '@tanstack/react-query'
@@ -21,12 +22,24 @@ interface EditUserInput {
 }
 
 export function Login() {
+  const navigate = useNavigate();
+
   return useMutation({
     mutationFn: async ({ username, password }: Credenciales) => {
-      const data = await loginUser({ username, password, })
-      return { ...data, username }
+      // ✅ Activamos el skeleton inmediatamente
+      usuarioStore.setState((prev) => ({
+        ...prev,
+        skeleton: true,
+      }));
+
+      const data = await loginUser({ username, password });
+
+      // ✅ Retornamos los datos para que onSuccess lo use
+      return { ...data, username };
     },
-    onSuccess: (data) => {
+
+    onSuccess: async (data) => {
+      // ✅ Actualizamos el store con la info del usuario, PERO dejamos skeleton activo
       usuarioStore.setState((prev) => ({
         ...prev,
         usuario: data.username,
@@ -34,14 +47,29 @@ export function Login() {
         nombre: data.nombre,
         apellido: data.apellido,
         provincia: data.provincia,
-        canton: data.canton
-      }))
+        canton: data.canton,
+        // 👈 NO apagues skeleton aún
+      }));
+
+      // ✅ Redirigimos a /home
+      navigate({ to: "/home" });
+
+      // ✅ Le damos tiempo a HomePage de montarse y mostrar el Skeleton
+      await new Promise((r) => setTimeout(r, 5000)); // Pequeño delay opcional
+
+      // ✅ Luego apagamos el skeleton
+      usuarioStore.setState((prev) => ({
+        ...prev,
+        skeleton: false,
+      }));
     },
+
     onError: () => {
-      cerrarSesion()
+      cerrarSesion(); // También deberías apagar skeleton aquí si lo activaste antes
     },
-  })
+  });
 }
+
 
 export function Register() {
   return useMutation({
