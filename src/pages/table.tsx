@@ -10,23 +10,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+
 import { Label } from "@radix-ui/react-label"
 import { PiggyBank, Search, Settings, Landmark } from "lucide-react"
-
+import { columns } from './table/columns'
+import { DataTable } from './table/data-table'
+import React from 'react'
 const estados = Array.from({ length: 5 }, (_, i) => `Estado ${i + 1}`)
 
 export default function FilledCards() {
-  const { data: invoices = [], isLoading, isError } = useQuery({
+  const { data: rawInvoices = [], isLoading, isError } = useQuery({
     queryKey: ['invoices'],
     queryFn: async () => {
       const res = await fetch('/invoices.json')
@@ -34,6 +27,28 @@ export default function FilledCards() {
       return res.json()
     },
   })
+
+const invoices = React.useMemo(() => {
+  return rawInvoices.map((item: any) => {
+    const originalValue = item.montoCredito
+    const montoStr =
+      typeof originalValue === "string"
+        ? originalValue
+        : originalValue !== null && originalValue !== undefined
+        ? String(originalValue)
+        : ""
+
+    const montoLimpio = montoStr.replace(/[^0-9.]/g, "")
+    const montoNumerico = parseFloat(montoLimpio)
+
+    return {
+      ...item,
+      amount: !isNaN(montoNumerico) ? montoNumerico : 0, // <---- Aquí cambio el nombre
+    }
+  })
+}, [rawInvoices])
+
+  
 
   return (
     <div className="w-full px-2">
@@ -123,33 +138,7 @@ export default function FilledCards() {
         ) : isError ? (
           <p className="text-center text-red-500">Error al cargar los datos</p>
         ) : (
-          <Table>
-            <TableCaption>Coacmes 2025.</TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[100px]">Invoice</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Method</TableHead>
-                <TableHead className="text-right">Amount</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {invoices.map((invoice: any) => (
-                <TableRow key={invoice.invoice}>
-                  <TableCell className="font-medium">{invoice.invoice}</TableCell>
-                  <TableCell>{invoice.paymentStatus}</TableCell>
-                  <TableCell>{invoice.paymentMethod}</TableCell>
-                  <TableCell className="text-right">{invoice.totalAmount}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-            <TableFooter>
-              <TableRow>
-                <TableCell colSpan={3}>Total</TableCell>
-                <TableCell className="text-right">$2,500.00</TableCell>
-              </TableRow>
-            </TableFooter>
-          </Table>
+          <DataTable columns={columns} data={invoices} />
         )}
       </div>
     </div>

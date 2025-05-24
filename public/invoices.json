@@ -1,44 +1,298 @@
 [
-    {
-        "invoice": "INV001",
-        "paymentStatus": "Paid",
-        "totalAmount": "$250.00",
-        "paymentMethod": "Credit Card"
-    },
-    {
-        "invoice": "INV002",
-        "paymentStatus": "Pending",
-        "totalAmount": "$150.00",
-        "paymentMethod": "PayPal"
-    },
-    {
-        "invoice": "INV003",
-        "paymentStatus": "Unpaid",
-        "totalAmount": "$350.00",
-        "paymentMethod": "Bank Transfer"
-    },
-    {
-        "invoice": "INV004",
-        "paymentStatus": "Paid",
-        "totalAmount": "$450.00",
-        "paymentMethod": "Credit Card"
-    },
-    {
-        "invoice": "INV005",
-        "paymentStatus": "Paid",
-        "totalAmount": "$550.00",
-        "paymentMethod": "PayPal"
-    },
-    {
-        "invoice": "INV006",
-        "paymentStatus": "Pending",
-        "totalAmount": "$200.00",
-        "paymentMethod": "Bank Transfer"
-    },
-    {
-        "invoice": "INV007",
-        "paymentStatus": "Unpaid",
-        "totalAmount": "$300.00",
-        "paymentMethod": "Credit Card"
-    }
+  {
+    "nombre": "Carlos Mero",
+    "correo": "carlos.mero@example.com",
+    "residencia": "Portoviejo",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 300.00
+  },
+  {
+    "nombre": "Andrea Zambrano",
+    "correo": "andrea.zambrano@example.com",
+    "residencia": "Manta",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 450.00
+  },
+  {
+    "nombre": "Jorge Loor",
+    "correo": "jorge.loor@example.com",
+    "residencia": "Chone",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.00
+  },
+  {
+    "nombre": "Lucía Macías",
+    "correo": "lucia.macias@example.com",
+    "residencia": "Montecristi",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 120.00
+  },
+  {
+    "nombre": "Pedro Vera",
+    "correo": "pedro.vera@example.com",
+    "residencia": "Jipijapa",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 600.00
+  },
+  {
+    "nombre": "Sofía Mendoza",
+    "correo": "sofia.mendoza@example.com",
+    "residencia": "Rocafuerte",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 230.00
+  },
+  {
+    "nombre": "Daniel Delgado",
+    "correo": "daniel.delgado@example.com",
+    "residencia": "Tosagua",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.00
+  },
+  {
+    "nombre": "Marta Bravo",
+    "correo": "marta.bravo@example.com",
+    "residencia": "Sucre",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 510.00
+  },
+  {
+    "nombre": "Iván Cedeño",
+    "correo": "ivan.cedeno@example.com",
+    "residencia": "El Carmen",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 380.00
+  },
+  {
+    "nombre": "Fernanda Vera",
+    "correo": "fernanda.vera@example.com",
+    "residencia": "Flavio Alfaro",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.00
+  },
+  {
+    "nombre": "Ricardo Macías",
+    "correo": "ricardo.macias@example.com",
+    "residencia": "Paján",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 275.00
+  },
+  {
+    "nombre": "Gina Córdova",
+    "correo": "gina.cordova@example.com",
+    "residencia": "24 de Mayo",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 145.00
+  },
+  {
+    "nombre": "Roberto Pico",
+    "correo": "roberto.pico@example.com",
+    "residencia": "Santa Ana",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 330.00
+  },
+  {
+    "nombre": "Verónica Santana",
+    "correo": "veronica.santana@example.com",
+    "residencia": "Olmedo",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.00
+  },
+  {
+    "nombre": "Nelson Moreira",
+    "correo": "nelson.moreira@example.com",
+    "residencia": "Jama",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 220.00
+  },
+  {
+    "nombre": "Carla Mendoza",
+    "correo": "carla.mendoza@example.com",
+    "residencia": "Pedernales",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 310.00
+  },
+  {
+    "nombre": "Esteban Álava",
+    "correo": "esteban.alava@example.com",
+    "residencia": "San Vicente",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 490.00
+  },
+  {
+    "nombre": "Melina Anchundia",
+    "correo": "melina.anchundia@example.com",
+    "residencia": "Puerto López",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 340.00
+  },
+  {
+    "nombre": "Luis Delgado",
+    "correo": "luis.delgado@example.com",
+    "residencia": "Portoviejo",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 210.00
+  },
+  {
+    "nombre": "María León",
+    "correo": "maria.leon@example.com",
+    "residencia": "Manta",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.00
+  },
+  {
+    "nombre": "Kevin Mendoza",
+    "correo": "kevin.mendoza@example.com",
+    "residencia": "Jipijapa",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 450.00
+  },
+  {
+    "nombre": "Julia Loor",
+    "correo": "julia.loor@example.com",
+    "residencia": "Chone",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 160.00
+  },
+  {
+    "nombre": "Francisco Mendoza",
+    "correo": "francisco.mendoza@example.com",
+    "residencia": "Montecristi",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 290.00
+  },
+  {
+    "nombre": "Camila Zambrano",
+    "correo": "camila.zambrano@example.com",
+    "residencia": "Rocafuerte",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 310.00
+  },
+  {
+    "nombre": "Diego Vélez",
+    "correo": "diego.velez@example.com",
+    "residencia": "Tosagua",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.00
+  },
+  {
+    "nombre": "Andrea Santos",
+    "correo": "andrea.santos@example.com",
+    "residencia": "Sucre",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 270.00
+  },
+  {
+    "nombre": "Oscar Cedeño",
+    "correo": "oscar.cedeno@example.com",
+    "residencia": "El Carmen",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 500.00
+  },
+  {
+    "nombre": "Karla Vera",
+    "correo": "karla.vera@example.com",
+    "residencia": "Flavio Alfaro",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.00
+  },
+  {
+    "nombre": "Julio Palma",
+    "correo": "julio.palma@example.com",
+    "residencia": "Paján",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 280.00
+  },
+  {
+    "nombre": "Brenda Pico",
+    "correo": "brenda.pico@example.com",
+    "residencia": "Santa Ana",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 350.00
+  },
+  {
+    "nombre": "Cristina Quijije",
+    "correo": "cristina.quijije@example.com",
+    "residencia": "Olmedo",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.00
+  },
+  {
+    "nombre": "Jonathan Vera",
+    "correo": "jonathan.vera@example.com",
+    "residencia": "Jama",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 200.00
+  },
+  {
+    "nombre": "Diana Loor",
+    "correo": "diana.loor@example.com",
+    "residencia": "Pedernales",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 260.00
+  },
+  {
+    "nombre": "Andrés Macías",
+    "correo": "andres.macias@example.com",
+    "residencia": "San Vicente",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 390.00
+  },
+  {
+    "nombre": "Gabriela Giler",
+    "correo": "gabriela.giler@example.com",
+    "residencia": "Puerto López",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 320.00
+  },
+  {
+    "nombre": "Henry Solís",
+    "correo": "henry.solis@example.com",
+    "residencia": "Portoviejo",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 180.00
+  },
+  {
+    "nombre": "Paola Zamora",
+    "correo": "paola.zamora@example.com",
+    "residencia": "Manta",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 510.00
+  }
 ]
