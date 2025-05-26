@@ -1,7 +1,7 @@
 "use client"
-import type { ColumnDef } from "@tanstack/react-table"
+import type { ColumnDef, FilterFn } from "@tanstack/react-table"
 import { MoreHorizontal, ArrowUpDown } from "lucide-react"
- 
+
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -12,26 +12,62 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { toast } from "sonner"
+import { Checkbox } from "@/components/ui/checkbox"
 
 export type Cliente = {
   nombre: string
   correo: string
   residencia: string
-  status: "Al día" | "En mora"
+  status: "Al dia" | "En mora"
   credito: boolean
   montoCredito: string
 }
 
+const myCustomFilterFn: FilterFn<Cliente> = (
+  row,
+  _columnId,
+  filterValue,
+  _addMeta
+) => {
+  const filterParts = filterValue.split(" ");
+  const rowValues =
+    `${row.original.correo} ${row.original.nombre} ${row.original.status} ${row.original.residencia}`.toLowerCase();
+  return filterParts.every((part: string) => rowValues.includes(part))
+};
+
 export const columns: ColumnDef<Cliente>[] = [
   {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
     accessorKey: "nombre",
-     header: ({ column }) => {
+    filterFn: myCustomFilterFn,
+    header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-         Cliente
+          Cliente
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
@@ -39,6 +75,7 @@ export const columns: ColumnDef<Cliente>[] = [
   },
   {
     accessorKey: "residencia",
+    filterFn: myCustomFilterFn,
     header: ({ column }) => {
       return (
         <Button
@@ -53,6 +90,7 @@ export const columns: ColumnDef<Cliente>[] = [
   },
   {
     accessorKey: "correo",
+    filterFn: myCustomFilterFn,
     header: ({ column }) => {
       return (
         <Button
@@ -67,7 +105,7 @@ export const columns: ColumnDef<Cliente>[] = [
   },
   {
     accessorKey: "credito",
-     header: ({ column }) => {
+    header: ({ column }) => {
       return (
         <Button
           variant="ghost"
@@ -81,8 +119,9 @@ export const columns: ColumnDef<Cliente>[] = [
     cell: ({ getValue }) => (getValue() ? "Sí" : "No"),
   },
   {
-  accessorKey: "status",
-   header: ({ column }) => {
+    accessorKey: "status",
+    filterFn: myCustomFilterFn,
+    header: ({ column }) => {
       return (
         <Button
           variant="ghost"
@@ -93,27 +132,27 @@ export const columns: ColumnDef<Cliente>[] = [
         </Button>
       )
     },
-  cell: ({ row }) => {
-    const status = row.getValue("status") as string;
+    cell: ({ row }) => {
+      const status = row.getValue("status") as string;
 
-    const color = {
-      "Al día": "oklch(72.3% 0.219 149.579)",
-      "En mora": "oklch(57.7% 0.245 27.325)"
-    }[status] ?? "gray";
+      const color = {
+        "Al día": "oklch(72.3% 0.219 149.579)",
+        "En mora": "oklch(57.7% 0.245 27.325)"
+      }[status] ?? "gray";
 
-    return (
-      <span
-        className="px-2 py-1 rounded text-white text-sm"
-        style={{ backgroundColor: color }}
-      >
-        {status}
-      </span>
-    );
-  },
+      return (
+        <span
+          className="px-2 py-1 rounded text-white text-sm"
+          style={{ backgroundColor: color }}
+        >
+          {status}
+        </span>
+      );
+    },
   },
   {
     accessorKey: "amount",
-     header: ({ column }) => {
+    header: ({ column }) => {
       return (
         <Button
           variant="ghost"
@@ -130,15 +169,15 @@ export const columns: ColumnDef<Cliente>[] = [
         style: "currency",
         currency: "USD",
       }).format(amount)
- 
+
       return <div className="text-right font-medium">{formatted}</div>
     },
   },
-    {
+  {
     id: "actions",
     cell: ({ row }) => {
       const payment = row.original
- 
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -158,7 +197,7 @@ export const columns: ColumnDef<Cliente>[] = [
               Copiar Monto
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-             <DropdownMenuItem
+            <DropdownMenuItem
               onClick={() => {
                 navigator.clipboard.writeText(payment.correo);
                 toast("Correo copiado", { position: "top-right" })
