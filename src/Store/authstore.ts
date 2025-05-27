@@ -12,7 +12,7 @@ interface UsuarioState {
 
 export const usuarioStore = new Store<UsuarioState>({
     usuario: null,
-    autenticado: false,
+    autenticado: true,
     nombre: null,
     apellido: null,
     provincia: null,

@@ -44,7 +44,7 @@ import { Input } from "@/components/ui/input"
 import { useState } from "react"
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]  // sigue usando ColumnDef como tipo
+  columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
 
@@ -117,6 +117,7 @@ export function DataTable<TData, TValue>({
             </SelectGroup>
           </SelectContent>
         </Select>
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -146,7 +147,26 @@ export function DataTable<TData, TValue>({
               })}
           </DropdownMenuContent>
         </DropdownMenu>
-
+        <Select
+          onValueChange={(value) => {
+            table.setPageSize(+value);
+          }}
+        >
+          <SelectTrigger className="w-[180px] m-2">
+            <SelectValue placeholder="10 Filas" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Filas por Pagina</SelectLabel>
+              <SelectItem value="5">5</SelectItem>
+              <SelectItem value="10">10</SelectItem>
+              <SelectItem value="20">20</SelectItem>
+              <SelectItem value="40">40</SelectItem>
+              <SelectItem value="70">70</SelectItem>
+              <SelectItem value="100">100</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </div>
 
       <div className="rounded-md border">
@@ -209,7 +229,6 @@ export function DataTable<TData, TValue>({
             </Button>
           </div>
         </div>
-
       </div>
     </div>
 

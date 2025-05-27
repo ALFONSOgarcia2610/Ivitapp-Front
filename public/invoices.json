@@ -1,5 +1,405 @@
 [
   {
+    "nombre": "David Vera",
+    "correo": "david.vera@example.com",
+    "residencia": "Puerto López",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 327.59
+  },
+  {
+    "nombre": "Álvaro Bravo",
+    "correo": "álvaro.bravo@example.com",
+    "residencia": "Pedernales",
+    "status": "En mora",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Eva García",
+    "correo": "eva.garcía@example.com",
+    "residencia": "El Carmen",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 576.34
+  },
+  {
+    "nombre": "Javier Pérez",
+    "correo": "javier.pérez@example.com",
+    "residencia": "San Vicente",
+    "status": "En mora",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Patricia Sánchez",
+    "correo": "patricia.sánchez@example.com",
+    "residencia": "Sucre",
+    "status": "En mora",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Luisa García",
+    "correo": "luisa.garcía@example.com",
+    "residencia": "Rocafuerte",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 511.13
+  },
+  {
+    "nombre": "Diana Pico",
+    "correo": "diana.pico@example.com",
+    "residencia": "Rocafuerte",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Darío Martínez",
+    "correo": "darío.martínez@example.com",
+    "residencia": "Flavio Alfaro",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 120.64
+  },
+  {
+    "nombre": "Lucas Loor",
+    "correo": "lucas.loor@example.com",
+    "residencia": "San Vicente",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Renato Torres",
+    "correo": "renato.torres@example.com",
+    "residencia": "Montecristi",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 393.66
+  },
+  {
+    "nombre": "Felipe Vega",
+    "correo": "felipe.vega@example.com",
+    "residencia": "Chone",
+    "status": "En mora",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Esteban Ortega",
+    "correo": "esteban.ortega@example.com",
+    "residencia": "Montecristi",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 586.42
+  },
+  {
+    "nombre": "Alonso Flores",
+    "correo": "alonso.flores@example.com",
+    "residencia": "24 de Mayo",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Silvana Quijije",
+    "correo": "silvana.quijije@example.com",
+    "residencia": "Jipijapa",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Julieta Pérez",
+    "correo": "julieta.pérez@example.com",
+    "residencia": "Manta",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 180.05
+  },
+  {
+    "nombre": "Silvana Sánchez",
+    "correo": "silvana.sánchez@example.com",
+    "residencia": "Chone",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Mauricio Pérez",
+    "correo": "mauricio.pérez@example.com",
+    "residencia": "Jipijapa",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 257.49
+  },
+  {
+    "nombre": "Elena Flores",
+    "correo": "elena.flores@example.com",
+    "residencia": "Tosagua",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 226.5
+  },
+  {
+    "nombre": "Samuel Bravo",
+    "correo": "samuel.bravo@example.com",
+    "residencia": "Tosagua",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 187.13
+  },
+  {
+    "nombre": "Héctor López",
+    "correo": "héctor.lópez@example.com",
+    "residencia": "Jipijapa",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Felipe Pérez",
+    "correo": "felipe.pérez@example.com",
+    "residencia": "Portoviejo",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 160.55
+  },
+  {
+    "nombre": "Natalia Bravo",
+    "correo": "natalia.bravo@example.com",
+    "residencia": "Chone",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 119.38
+  },
+  {
+    "nombre": "Ana García",
+    "correo": "ana.garcía@example.com",
+    "residencia": "Chone",
+    "status": "En mora",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Diana Zambrano",
+    "correo": "diana.zambrano@example.com",
+    "residencia": "San Vicente",
+    "status": "En mora",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Mauricio Mendoza",
+    "correo": "mauricio.mendoza@example.com",
+    "residencia": "Flavio Alfaro",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 290.54
+  },
+  {
+    "nombre": "Diana Rodríguez",
+    "correo": "diana.rodríguez@example.com",
+    "residencia": "Manta",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 566.67
+  },
+  {
+    "nombre": "Pablo Torres",
+    "correo": "pablo.torres@example.com",
+    "residencia": "Pedernales",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Eva Loor",
+    "correo": "eva.loor@example.com",
+    "residencia": "Sucre",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "María Quijije",
+    "correo": "maría.quijije@example.com",
+    "residencia": "Jama",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 533.54
+  },
+  {
+    "nombre": "Daniela Vera",
+    "correo": "daniela.vera@example.com",
+    "residencia": "San Vicente",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Cristian Loor",
+    "correo": "cristian.loor@example.com",
+    "residencia": "San Vicente",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 235.75
+  },
+  {
+    "nombre": "Álvaro Loor",
+    "correo": "álvaro.loor@example.com",
+    "residencia": "Santa Ana",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Arturo López",
+    "correo": "arturo.lópez@example.com",
+    "residencia": "Puerto López",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 191.97
+  },
+  {
+    "nombre": "Felipe Sánchez",
+    "correo": "felipe.sánchez@example.com",
+    "residencia": "Pedernales",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 559.89
+  },
+  {
+    "nombre": "Patricia Rivas",
+    "correo": "patricia.rivas@example.com",
+    "residencia": "Flavio Alfaro",
+    "status": "En mora",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Eva Martínez",
+    "correo": "eva.martínez@example.com",
+    "residencia": "Manta",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 285.84
+  },
+  {
+    "nombre": "Milena Rivera",
+    "correo": "milena.rivera@example.com",
+    "residencia": "San Vicente",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Álvaro Rivas",
+    "correo": "álvaro.rivas@example.com",
+    "residencia": "Olmedo",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Diana Martínez",
+    "correo": "diana.martínez@example.com",
+    "residencia": "Rocafuerte",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 532.12
+  },
+  {
+    "nombre": "Noelia Zambrano",
+    "correo": "noelia.zambrano@example.com",
+    "residencia": "El Carmen",
+    "status": "Al día",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Patricia Sánchez",
+    "correo": "patricia.sánchez@example.com",
+    "residencia": "Chone",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 112.75
+  },
+  {
+    "nombre": "María García",
+    "correo": "maría.garcía@example.com",
+    "residencia": "Pedernales",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 547.9
+  },
+  {
+    "nombre": "Ana Morales",
+    "correo": "ana.morales@example.com",
+    "residencia": "Sucre",
+    "status": "En mora",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Darío Morales",
+    "correo": "darío.morales@example.com",
+    "residencia": "Puerto López",
+    "status": "En mora",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Sebastián Pérez",
+    "correo": "sebastián.pérez@example.com",
+    "residencia": "Jipijapa",
+    "status": "En mora",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Erick Bravo",
+    "correo": "erick.bravo@example.com",
+    "residencia": "Chone",
+    "status": "En mora",
+    "credito": true,
+    "montoCredito": 564.45
+  },
+  {
+    "nombre": "Ramiro Rivera",
+    "correo": "ramiro.rivera@example.com",
+    "residencia": "Jama",
+    "status": "En mora",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
+    "nombre": "Elena Sánchez",
+    "correo": "elena.sánchez@example.com",
+    "residencia": "24 de Mayo",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 535.32
+  },
+  {
+    "nombre": "Lucas Torres",
+    "correo": "lucas.torres@example.com",
+    "residencia": "Olmedo",
+    "status": "Al día",
+    "credito": true,
+    "montoCredito": 391.13
+  },
+  {
+    "nombre": "Bruno Vera",
+    "correo": "bruno.vera@example.com",
+    "residencia": "El Carmen",
+    "status": "En mora",
+    "credito": false,
+    "montoCredito": 0.0
+  },
+  {
     "nombre": "Carlos Mero",
     "correo": "carlos.mero@example.com",
     "residencia": "Portoviejo",
