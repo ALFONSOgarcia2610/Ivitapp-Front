@@ -1,149 +1,133 @@
-import { usuarioStore } from '../Store/authstore'
+// routes/routes.ts
 import {
   createRootRoute,
   createRoute,
   createRouter,
-  Outlet,
   redirect
-} from '@tanstack/react-router'
-import { lazy } from 'react'
+} from '@tanstack/react-router';
+import { lazy } from 'react';
+import { usuarioStore } from '../Store/authstore';
+import DashboardLayout from '../pages/Dashboard';
 
 const RootRoute = createRootRoute({
-  component: () => <Outlet />,
+  component: DashboardLayout,
+});
+
+const MainRoute = createRoute({
+  getParentRoute: () => RootRoute,
+  path: '/',
+  component: lazy(() => import('../pages/MainPage')),
+  beforeLoad: () => {
+    if (usuarioStore.state.autenticado) throw redirect({ to: '/app/home' });
+    if (!usuarioStore.state.autenticado) throw redirect({ to: '/app/home' });
+  },
 });
 
 const LoginRoute = createRoute({
   getParentRoute: () => RootRoute,
   path: '/login',
-  component: lazy(() => import('../pages/Login')),
+  component: lazy(() => import('../pages/Usuario/Login-page')),
   beforeLoad: () => {
-    if (usuarioStore.state.autenticado) throw redirect({ to: '/home' })
+    if (usuarioStore.state.autenticado) throw redirect({ to: '/app/home' });
   },
-})
+});
 
 const RegisterRoute = createRoute({
   getParentRoute: () => RootRoute,
   path: '/register',
-  component: lazy(() => import('../pages/Register')),
+  component: lazy(() => import('../pages/Login/Register')),
   beforeLoad: () => {
-    if (usuarioStore.state.autenticado) throw redirect({ to: '/' })
+    if (usuarioStore.state.autenticado) throw redirect({ to: '/app/home' });
   },
-})
-const DasRouter = createRoute({
+});
+const NosotrosRoute = createRoute({
   getParentRoute: () => RootRoute,
-  path: '/',
+  path: '/nosotros',
+  component: lazy(() => import('../pages/nosotros')),
+  beforeLoad: () => {
+    if (usuarioStore.state.autenticado) throw redirect({ to: '/app/home' });
+  },
+});
+
+const InvitacionPublicaRoute = createRoute({
+  getParentRoute: () => RootRoute,
+  path: '/invitacion/$invitacionId',
+  component: lazy(() => import('../pages/Invitaciones/AlfonsoyCristinaBoda')),
+});
+
+const AppLayoutRoute = createRoute({
+  getParentRoute: () => RootRoute,
+  path: '/app',
   component: lazy(() => import('../pages/Dashboard')),
   beforeLoad: () => {
-    if (!usuarioStore.state.autenticado) throw redirect({ to: '/login' })
+    if (!usuarioStore.state.autenticado) throw redirect({ to: '/login' });
   },
-})
-
-
-const PokemonRoute = createRoute({
-  getParentRoute: () => DasRouter,
-  path: '/pokemon',
-  component: lazy(() => import('../pages/Pokemon')),
-  beforeLoad: () => {
-    if (!usuarioStore.state.autenticado) throw redirect({ to: '/login' })
-  },
-})
-
-const SkeletonRoute = createRoute({
-  getParentRoute: () => DasRouter,
-  path: '/skeleton',
-  component: lazy(() => import('../pages/skeleton')),
-  beforeLoad: () => {
-    if (!usuarioStore.state.autenticado) throw redirect({ to: '/login' })
-  },
-})
-
-const TableRoute = createRoute({
-  getParentRoute: () => DasRouter,
-  path: '/table',
-  component: lazy(() => import('../pages/table')),
-  beforeLoad: () => {
-    if (!usuarioStore.state.autenticado) throw redirect({ to: '/login' })
-  },
-})
-
-const ClimaRoute = createRoute({
-  getParentRoute: () => DasRouter,
-  path: '/clima',
-  component: lazy(() => import('../pages/Clima')),
-  beforeLoad: () => {
-    if (!usuarioStore.state.autenticado) {
-      throw redirect({
-        to: '/login',
-      })
-    }
-  },
-})
+});
 
 const HomeRoute = createRoute({
-  getParentRoute: () => DasRouter,
+  getParentRoute: () => AppLayoutRoute,
   path: '/home',
   component: lazy(() => import('../pages/home')),
-  beforeLoad: () => {
-    if (!usuarioStore.state.autenticado) {
-      throw redirect({
-        to: '/login',
-      })
-    }
-  },
-})
-const ContraseñaRoute = createRoute({
-  getParentRoute: () => DasRouter,
-  path: '/ChangePassword',
-  component: lazy(() => import('../pages/Contraseña')),
-  beforeLoad: () => {
-    if (!usuarioStore.state.autenticado) {
-      throw redirect({
-        to: '/login',
-      })
-    }
-  },
-})
-const editRoute = createRoute({
-  getParentRoute: () => DasRouter,
-  path: '/EditUser',
-  component: lazy(() => import('../pages/editUser')),
-  beforeLoad: () => {
-    if (!usuarioStore.state.autenticado) {
-      throw redirect({
-        to: '/login',
-      })
-    }
-  },
-})
+});
 
+// Agrega tus rutas privadas aquí como hijas de AppLayoutRoute
+const gestionInvitadosRoute = createRoute({
+  getParentRoute: () => AppLayoutRoute,
+  path: '/invitados',
+  component: lazy(() => import('../pages/invitados/GestionInvitados')),
+});
+
+const SkeletonRoute = createRoute({
+  getParentRoute: () => AppLayoutRoute,
+  path: '/skeleton',
+  component: lazy(() => import('../pages/components/skeleton')),
+});
+const RecepcionRoute = createRoute({
+  getParentRoute: () => AppLayoutRoute,
+  path: '/recepcionInvitados',
+  component: lazy(() => import('../pages/invitados/RecepcionInvitados')),
+});
+const ContraseñaRoute = createRoute({
+  getParentRoute: () => AppLayoutRoute,
+  path: '/ChangePassword',
+  component: lazy(() => import('../pages/Usuario/CambiarContraseña')),
+});
+const EditRoute = createRoute({
+  getParentRoute: () => AppLayoutRoute,
+  path: '/EditUser',
+  component: lazy(() => import('../pages/Usuario/editarUsuario')),
+});
 
 const NotFoundRoute = createRoute({
   getParentRoute: () => RootRoute,
   path: '*',
   beforeLoad: () => {
-    throw redirect({ to: '/login' })
+    throw redirect({ to: '/login' });
   },
   component: () => null,
-})
+});
 
 const routeTree = RootRoute.addChildren([
+  MainRoute,
   LoginRoute,
   RegisterRoute,
-  PokemonRoute,
-  ClimaRoute,
-  DasRouter,
+  NosotrosRoute,
+  InvitacionPublicaRoute,
+  AppLayoutRoute.addChildren([
+    HomeRoute,
+    gestionInvitadosRoute,
+    SkeletonRoute,
+    RecepcionRoute,
+    ContraseñaRoute,
+    EditRoute,
+  ]),
   NotFoundRoute,
-  ContraseñaRoute,
-  editRoute,
-  HomeRoute,
-  SkeletonRoute,
-  TableRoute
-])
+]);
 
-export const router = createRouter({ routeTree })
+export const router = createRouter({ routeTree });
 
 declare module '@tanstack/react-router' {
   interface Register {
-    router: typeof router
+    router: typeof router;
   }
 }

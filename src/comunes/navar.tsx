@@ -3,15 +3,19 @@
 import {
   LogOut,
   RotateCcwKey,
-  TextSearch,
-  CloudSun,
-  Landmark,
+ // TextSearch,
+ // CloudSun,
+
   CircleChevronRight,
   CircleChevronLeft,
   UserRoundPen,
   MapPinned,
   LayoutDashboard,
-  Table,
+  Users,
+  ScanQrCode,
+  PartyPopper,
+  ListCollapse,
+ // Table,
 } from "lucide-react";
 
 import {
@@ -46,12 +50,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 const items = [
-  { title: "Home", to: "/home", icon: LayoutDashboard },
-  { title: "Pokedex", to: "/pokemon", icon: TextSearch },
-  { title: "Clima", to: "/clima", icon: CloudSun },
-  { title: "Cambiar Contraseña", to: "/ChangePassword", icon: RotateCcwKey },
-  { title: "Editar Usuario", to: "/EditUser", icon: UserRoundPen },
-  { title: "Table", to: "/table", icon: Table },
+  { title: "Inicio", to: "/app/home", icon: LayoutDashboard },
+  { title: "Invitados", to: "/app/invitados", icon: Users },
+  { title: "Recepcion", to: "/app/recepcionInvitados", icon: ScanQrCode },
+  { title: "Cambiar Contraseña", to: "/app/ChangePassword", icon: RotateCcwKey },
+  { title: "Editar Usuario", to: "/app/EditUser", icon: UserRoundPen },
+ // { title: "Table", to: "/app/table", icon: Table },
 ];
 
 export default function Navbar() {
@@ -79,7 +83,7 @@ export default function Navbar() {
         <Sheet>
           <SheetTrigger asChild>
             <Button size="icon" variant="outline">
-              <Landmark className="w-5 h-5" />
+              <ListCollapse  className="w-5 h-5" />
             </Button>
           </SheetTrigger>
 
@@ -160,7 +164,7 @@ export default function Navbar() {
               </button>
               {!colapsado && (
                 <span className="text-lg">
-                  <Landmark className="w-6 h-6 text-primary" />
+                  <PartyPopper className="w-6 h-6 text-primary" />
                 </span>
               )}
             </div>
