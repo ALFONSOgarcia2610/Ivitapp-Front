@@ -10,12 +10,13 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  server: {
-    allowedHosts: true,
-     hmr: {
-      protocol: 'ws',
-      host: 'qqbaob-ip-177-53-214-5.tunnelmole.net',
-      port: 80,
-    },
-  },
-})
+  // Comentar o eliminar esta parte para producción:
+  // server: {
+  //   allowedHosts: true,
+  //   hmr: {
+  //     protocol: 'ws',
+  //     host: 'qqbaob-ip-177-53-214-5.tunnelmole.net',
+  //     port: 80,
+  //   },
+  // },
+});
