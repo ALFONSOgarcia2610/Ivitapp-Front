@@ -19,7 +19,7 @@ import Vestimenta from "@/img/vestimenta.png";
 import Primera from "@/img/Primera.jpeg";
 import Encuentro from "@/img/encuentro.jpeg";
 import Sobre from "@/img/sobre.png";
-import Musica from "@/music/Te amare.mp3";
+import Musica from "@/music/Fonseca - Que Suerte Tenerte (Audio).mp3";
 import { MapPin, Pause, Play } from "lucide-react";
 import { Countdown } from "../components/contador";
 import { motion } from "framer-motion";
@@ -158,7 +158,11 @@ export default function InvitacionCompleta() {
       </div>
 
 
-      <div className="max-w-xl mx-auto bg-[#f9f6f1] rounded-3xl p-10 my-12 shadow-lg border border-[#b29d7f] font-serif text-center text-gray-700">
+      <motion.section className="max-w-xl mx-auto bg-[#f9f6f1] rounded-3xl p-10 my-12 shadow-lg border border-[#b29d7f] font-serif text-center text-gray-700"
+       initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+      >
         <p className="mb-12 text-base leading-relaxed italic text-[#7a6b4f] max-w-md mx-auto">
           Nos sentimos dichosos de comenzar esta nueva etapa en nuestras vidas y queremos invitarlos a compartir la alegría de unirnos en matrimonio.
         </p>
@@ -200,7 +204,7 @@ export default function InvitacionCompleta() {
             </p>
           </div>
         </div>
-      </div>
+      </motion.section>
 
       <motion.section className="max-w-4xl mx-auto px-4 py-6 flex flex-col items-center gap-4" initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -484,7 +488,7 @@ export default function InvitacionCompleta() {
               Código de Vestimenta
             </h2>
             <p className="text-lg leading-relaxed text-gray-700 mb-8 font-serif">
-              Elegante y cómodo, evita blanco y negro.
+              Elegante y cómodo.
             </p>
 
             {/* Imagen para código de vestimenta */}
@@ -494,12 +498,7 @@ export default function InvitacionCompleta() {
               className="mx-auto mb-8 w-48 rounded-lg shadow-md object-cover"
             />
 
-            <div className="flex justify-center gap-6">
-              <span className="w-10 h-10 rounded-full bg-rose-400 shadow-md" />
-              <span className="w-10 h-10 rounded-full bg-amber-400 shadow-md" />
-              <span className="w-10 h-10 rounded-full bg-emerald-400 shadow-md" />
-              <span className="w-10 h-10 rounded-full bg-blue-400 shadow-md" />
-            </div>
+       
           </div>
           
           <div className="mt-10 text-center space-y-4">
@@ -526,16 +525,16 @@ export default function InvitacionCompleta() {
                 alt="Iglesia San José"
                 className="mx-auto w-28 h-28 rounded-full object-cover shadow-lg border-4 border-gray-200"
               />
-              <div className="mx-auto w-6 h-6 rounded-full bg-gray-600 shadow-lg mt-4 z-20" />
+              <div className="" />
               <h3 className="mb-3 font-bold text-xl text-gray-800 tracking-wide uppercase font-serif mt-4">
-                Iglesia
+                Ceremonia Religiosa
               </h3>
               <p className="leading-relaxed text-lg font-bold text-gray-700 font-serif">4:00 PM</p>
               <p className="max-w-xs mx-auto mt-2 text-gray-700 leading-relaxed font-serif">
-                Ceremonia Religiosa
+                Iglesia San Ignacio de Loyola
               </p>
               <a
-                href="https://www.google.com/maps?q=iglesia+san+jose+ciudad+ejemplo"
+                href="https://www.google.com/maps/place/Iglesia+San+Ignacio+de+Loyola/@-1.0611007,-80.4702227,17z/data=!3m1!4b1!4m6!3m5!1s0x902bf342284debbb:0x229906c662461cf2!8m2!3d-1.0611007!4d-80.4702227!16s%2Fg%2F11svl4bn5h?entry=ttu&g_ep=EgoyMDI1MDgxMi4wIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 mt-4 text-base font-bold text-gray-800 hover:text-gray-600 transition-colors duration-200 font-serif underline"
@@ -552,16 +551,16 @@ export default function InvitacionCompleta() {
                 alt="Salón El Encanto"
                 className="mx-auto w-28 h-28 rounded-full object-cover shadow-lg border-4 border-gray-200"
               />
-              <div className="mx-auto w-6 h-6 rounded-full bg-gray-600 shadow-lg mt-4 z-20" />
+              <div className="" />
               <h3 className="mb-3 font-bold text-xl text-gray-800 tracking-wide uppercase font-serif mt-4">
                 Recepción
               </h3>
               <p className="leading-relaxed text-lg font-bold text-gray-700 font-serif">6:00 PM - Amanecer</p>
               <p className="max-w-xs mx-auto mt-2 text-gray-700 leading-relaxed font-serif">
-                Fiesta y Celebración
+                La Ramada Del Sabor
               </p>
               <a
-                href="https://www.google.com/maps?q=salon+el+encanto+ciudad+ejemplo"
+                href="https://www.google.com/maps/place/La+Ramada+Del+Sabor/@-1.0588492,-80.4701707,17z/data=!3m1!4b1!4m6!3m5!1s0x902bf2b968199481:0x20032a06c6b2d02c!8m2!3d-1.0588492!4d-80.4701707!16s%2Fg%2F11bxf4hnr1?entry=ttu&g_ep=EgoyMDI1MDgxMi4wIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 mt-4 text-base font-bold text-gray-800 hover:text-gray-600 transition-colors duration-200 font-serif underline"

@@ -75,7 +75,7 @@ export function DescargarQRsPDF({ invitados }: DescargarQRsPDFProps) {
 
     for (let i = 0; i < invitados.length; i++) {
       const inv = invitados[i];
-      const url = `http://localhost:5173/invitacion/${inv._id}`;
+      const url = `https://ivitappec.onrender.com/invitacion/${inv._id}`;
       const dataUrl = await QRCode.toDataURL(url, { width: qrSize, margin: 1 });
 
       doc.addImage(dataUrl, "PNG", x, y, qrSize, qrSize);

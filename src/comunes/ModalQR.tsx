@@ -11,7 +11,7 @@ interface ModalQRProps {
 }
 
 export const ModalQR = ({ open, onClose, idInvitado }: ModalQRProps) => {
-  const url = `http://localhost:5173/invitacion/${idInvitado}`;
+  const url = `https://ivitappec.onrender.com/invitacion/${idInvitado}`;
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
