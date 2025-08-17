@@ -19,7 +19,7 @@ import Vestimenta from "@/img/vestimenta.png";
 import Primera from "@/img/Primera.jpeg";
 import Encuentro from "@/img/encuentro.jpeg";
 import Sobre from "@/img/sobre.png";
-import Musica from "@/music/Fonseca - Que Suerte Tenerte (Audio).mp3";
+import Musica from "@/music/Hallelujah.mp3";
 import { MapPin, Pause, Play } from "lucide-react";
 import { Countdown } from "../components/contador";
 import { motion } from "framer-motion";
@@ -31,6 +31,9 @@ import confetti from "canvas-confetti";
 import ConfirmarAsistencia from "../components/confirmarAsistencia";
 import { TypingText } from "@/components/animate-ui/text/typing";
 import { WritingText } from "@/components/animate-ui/text/writing";
+import { Separator } from "@/components/ui/separator";
+import { Label } from "@/components/ui/label";
+
 
 
 const slides = [
@@ -105,9 +108,7 @@ export default function InvitacionCompleta() {
           </Button>
 
           {/* Adorno tipo hoja arriba */}
-          <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-16 h-4 bg-green-500 rounded-b-full group-hover:bg-green-700 transition duration-300" />
-          {/* Adorno tipo hoja abajo */}
-          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-4 bg-green-500 rounded-t-full group-hover:bg-green-700 transition duration-300" />
+
         </div>
 
       </div>
@@ -135,10 +136,10 @@ export default function InvitacionCompleta() {
               Nos casamos
             </p>
             <h1 className="text-[25px] sm:text-3xl md:text-6xl font-serif font-bold mb-1">
-              
+
               ALFONSO <span className="font-light">&</span> CRISTINA
             </h1>
-           <p className="uppercase tracking-wide text-[10px] sm:text-xs md:text-base">
+            <p className="uppercase tracking-wide text-[10px] sm:text-xs md:text-base">
               <WritingText
                 text="04 de Octubre del 2025"
                 spacing={9}
@@ -159,9 +160,9 @@ export default function InvitacionCompleta() {
 
 
       <motion.section className="max-w-xl mx-auto bg-[#f9f6f1] rounded-3xl p-10 my-12 shadow-lg border border-[#b29d7f] font-serif text-center text-gray-700"
-       initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.8 }}
       >
         <p className="mb-12 text-base leading-relaxed italic text-[#7a6b4f] max-w-md mx-auto">
           Nos sentimos dichosos de comenzar esta nueva etapa en nuestras vidas y queremos invitarlos a compartir la alegría de unirnos en matrimonio.
@@ -476,49 +477,30 @@ export default function InvitacionCompleta() {
         </div>
       </section> */}
 
-
+      <motion.section className="w-full bg-[#b39574] bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] bg-repeat p-10" initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}>
+        <img
+          src={Sobre}
+          alt="Sobre cerrado"
+          className="mx-auto w-20 h-auto opacity-90 -mt-5"
+        />
+        <h3 className=" font-bold text-xl text-gray-800 tracking-wide uppercase font-serif">
+          Sugerencia de Regalo
+        </h3>
+        <p className="leading-relaxed text-lg text-gray-700 max-w-md mx-auto font-serif">
+          Los novios agradecen su gentileza en sobre cerrado
+        </p>
+      </motion.section>
 
       <section className="w-full bg-white py-20 px-6 md:px-12 lg:px-24">
+
         <div className="max-w-xl mx-auto text-center space-y-20 relative">
-
-          {/* Código de Vestimenta */}
-          <div>
-            <h2 className="mb-6 font-bold text-2xl text-gray-800 tracking-wide uppercase font-serif">
-              Código de Vestimenta
-            </h2>
-            <p className="text-lg leading-relaxed text-gray-700 mb-8 font-serif">
-              Elegante y cómodo.
-            </p>
-
-            {/* Imagen para código de vestimenta */}
-            <img
-              src={Vestimenta}
-              alt="Código de vestimenta"
-              className="mx-auto mb-8 w-48 rounded-lg shadow-md object-cover"
-            />
-
-       
-          </div>
-          
-          <div className="mt-10 text-center space-y-4">
-            <img
-              src={Sobre}
-              alt="Sobre cerrado"
-              className="mx-auto w-20 h-auto mt-2 opacity-90"
-            />
-            <h3 className="mb-3 font-bold text-xl text-gray-800 tracking-wide uppercase font-serif">
-              El mejor regalo es tu presencia
-            </h3>
-            <p className="leading-relaxed text-lg text-gray-700 max-w-md mx-auto font-serif">
-              Pero si deseas obsequiarnos algo, puedes hacerlo dentro de un sobre.
-            </p>
-          </div>
-
           {/* Línea de tiempo Iglesia - Recepción */}
-          <div className="relative flex flex-col items-center text-center z-10">
+          <div className="relative grid grid-cols-3 items-center text-center z-10">
 
             {/* Iglesia */}
-            <div className="mb-20 relative z-20 max-w-xs">
+            <div className=" relative z-20 max-w-xs ml-10">
               <img
                 src={Primera}
                 alt="Iglesia San José"
@@ -526,9 +508,9 @@ export default function InvitacionCompleta() {
               />
               <div className="" />
               <h3 className="mb-3 font-bold text-xl text-gray-800 tracking-wide uppercase font-serif mt-4">
-                Ceremonia Religiosa
+                Eucaristia
               </h3>
-              <p className="leading-relaxed text-lg font-bold text-gray-700 font-serif">4:00 PM</p>
+              <p className="leading-relaxed text-lg font-bold text-gray-700 font-serif">5:00 PM</p>
               <p className="max-w-xs mx-auto mt-2 text-gray-700 leading-relaxed font-serif">
                 Iglesia San Ignacio de Loyola
               </p>
@@ -542,9 +524,9 @@ export default function InvitacionCompleta() {
                 Ubicación
               </a>
             </div>
-
+            <Separator orientation="vertical" className="mx-auto h-24 bg-gray-300" />
             {/* Recepción */}
-            <div className="relative z-20 max-w-xs">
+            <div className="relative z-20 max-w-xs mr-10">
               <img
                 src={Encuentro}
                 alt="Salón El Encanto"
@@ -554,9 +536,9 @@ export default function InvitacionCompleta() {
               <h3 className="mb-3 font-bold text-xl text-gray-800 tracking-wide uppercase font-serif mt-4">
                 Recepción
               </h3>
-              <p className="leading-relaxed text-lg font-bold text-gray-700 font-serif">6:00 PM - Amanecer</p>
+              <p className="leading-relaxed text-lg font-bold text-gray-700 font-serif">6:00 PM</p>
               <p className="max-w-xs mx-auto mt-2 text-gray-700 leading-relaxed font-serif">
-                La Ramada Del Sabor
+                Eventos La Ramada
               </p>
               <a
                 href="https://www.google.com/maps/place/La+Ramada+Del+Sabor/@-1.0588492,-80.4701707,17z/data=!3m1!4b1!4m6!3m5!1s0x902bf2b968199481:0x20032a06c6b2d02c!8m2!3d-1.0588492!4d-80.4701707!16s%2Fg%2F11bxf4hnr1?entry=ttu&g_ep=EgoyMDI1MDgxMi4wIKXMDSoASAFQAw%3D%3D"
@@ -573,19 +555,19 @@ export default function InvitacionCompleta() {
       </section>
       <section className="w-full  bg-[#b39574] bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] bg-repeat">
         <div className="max-w-3xl mx-auto text-center space-y-12">
-        
+
           <motion.div
             className=" bg-[#b39574] bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] bg-repeat p-12 space-y-12 text-center flex flex-col items-center justify-center"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            <div className="flex justify-center my-6">
+            <div className="flex justify-center ">
               <GiLinkedRings className="text-gray-700 w-12 h-12 animate-pulse" />
             </div>
 
             {/* Mesa */}
-            <div className="flex flex-col items-center gap-4">
+            {/*  <div className="flex flex-col items-center gap-4">
               <motion.h2
                 className="text-2xl md:text-3xl font-bold text-gray-800 tracking-wide uppercase font-serif"
                 initial={{ opacity: 0, y: 30 }}
@@ -596,31 +578,56 @@ export default function InvitacionCompleta() {
               </motion.h2>
               <p className="text-5xl md:text-6xl font-bold text-gray-700 font-serif">{data.invitado.mesa}</p>
             </div>
-
+            */}
             {/* Admisión */}
             <div className="flex flex-col items-center gap-4">
+              <Label className="block w-full text-xl text-gray-700 font-serif font-bold">
+                <TypingText
+                  className="text-2xl"
+                  text="Confirmación de Asistencia"
+                  cursor
+                  cursorClassName="h-5"
+                />
+              </Label>
+              <p className="leading-relaxed text-lg text-gray-700 max-w-md mx-auto font-serif">
+                Estamos felices de compartir esta alegría contigo ¡Nos encantaría contar con tu asistencia!
+              </p>
+              <p className="text-lg leading-relaxed font-bold text-gray-800 max-w-md mx-auto font-serif tracking-wide">
+                RESPETUOSAMENTE NO NIÑOS.
+              </p>
               <motion.h2
-                className="text-2xl md:text-3xl font-bold text-gray-800 tracking-wide uppercase font-serif"
+                className="text-2xl md:text-2xl font-bold text-gray-800 tracking-wide font-serif"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
                 Admisión
               </motion.h2>
-              <p className="text-5xl md:text-6xl font-bold text-gray-700 font-serif">
+              <p className="text-2xl md:text-2xl font-bold text-gray-700 font-serif -mt-5">
                 {data.invitado.admision} persona{data.invitado.admision > 1 ? "s" : ""}
               </p>
             </div>
-            
-            <p className="text-lg leading-relaxed font-bold text-gray-800 max-w-md mx-auto font-serif tracking-wide">
-              RESPETUOSAMENTE NO NIÑOS.
-            </p>
             <ConfirmarAsistencia invitadoId={data.invitado._id} />
           </motion.div>
         </div>
       </section>
 
+      {/* Código de Vestimenta */}
+      <div className="mt-5">
+        <h2 className="mb-6 font-bold text-2xl text-gray-800 tracking-wide uppercase font-serif">
+          Código de Vestimenta
+        </h2>
+        <p className="text-lg leading-relaxed text-gray-700 mb-8 font-serif">
+          Formal
+        </p>
 
+        {/* Imagen para código de vestimenta */}
+        <img
+          src={Vestimenta}
+          alt="Código de vestimenta"
+          className="mx-auto mb-8 w-28 rounded-lg shadow-md object-cover"
+        />
+      </div>
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}

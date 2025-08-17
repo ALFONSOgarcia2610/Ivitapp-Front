@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { editarInvitado } from "@/database/dababase";
 
@@ -43,9 +42,6 @@ export default function ConfirmarAsistencia({ invitadoId }: ConfirmarAsistenciaP
 
   return (
     <div className="max-w-md mx-auto space-y-4 text-center">
-      <Label className="block w-full text-xl text-gray-700 font-[Georgia] font-bold">
-        ¿Asistirás al evento?
-      </Label>
       <div className="flex justify-center gap-6">
         <Button
           variant={estado === "Asistira" ? "default" : "outline"}
