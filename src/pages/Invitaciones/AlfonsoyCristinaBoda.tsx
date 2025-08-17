@@ -245,7 +245,7 @@ export default function InvitacionCompleta() {
       >
 
         <div className="text-center max-w-2xl mt-10 mb-10">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-700tracking-wide " style={{ fontFamily: "'Dancing Script', cursive", fontWeight: 700, lineHeight: 1.2 }}>
+          <h1 className="mb-3 font-bold text-xl text-gray-800 tracking-wide uppercase font-serif">
             ¡Una celebración de amor!
           </h1>
 
@@ -253,11 +253,10 @@ export default function InvitacionCompleta() {
             Con gran alegría te invitamos a compartir este momento especial con nosotros.
           </p>
 
-          <p className="text-2xl md:text-3xl font-bold text-gray-700 mb-2">
+          <p className="mb-3 font-bold text-xl text-gray-700 tracking-wide uppercase font-serif">
             Estimado/a:
           </p>
-          <p className="text-4xl md:text-5xl font-extrabold text-gray-700 tracking-wide font-serif mb-6" style={{ fontFamily: "'Dancing Script', cursive", fontWeight: 700, lineHeight: 1.2 }}>
-
+          <p className="mb-3 font-bold text-xl text-gray-800 tracking-wide uppercase font-serif">
             {data.invitado.nombre} {data.invitado.apellido}
           </p>
 

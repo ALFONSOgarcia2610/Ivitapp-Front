@@ -4,8 +4,9 @@ import logo from "@/img/logo.png";
 import logotwo from "@/img/logo2.png";
 import { Label } from "@/components/ui/label";
 import { usuarioStore } from "@/Store/authstore";
-import { UserRoundPlus } from "lucide-react";
+import { UserRoundPlus, X, Plus } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 import {
   Dialog,
   DialogTrigger,
@@ -75,6 +76,7 @@ export default function Pokemon() {
   const [prefijo, setPrefijo] = useState("+593");
   const [telefono, setTelefono] = useState("");
   const [refetchFlag, setRefetchFlag] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const username = usuarioStore.state.usuario ?? "";
 
   const { data, isLoading, refetch } = useQuery({
@@ -116,7 +118,8 @@ export default function Pokemon() {
 
   const DialogAgregarInvitado = (
     <Dialog open={open} onOpenChange={setOpen}>
-      <div className="w-full flex justify-end items-center gap-3 mb-6">
+      {/* Botones para Desktop */}
+      <div className="hidden sm:flex w-full justify-end items-center gap-3 mb-6">
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -132,16 +135,95 @@ export default function Pokemon() {
           </Tooltip>
         </TooltipProvider>
 
-        {/* Asegúrate de que DescargarQRsPDF sea un botón redondo similar */}
         <DescargarQRsPDF invitados={invitados} />
         <ExportExcelButton invitados={invitados} />
         <ImportExcelInvitados
           username={username}
           onSuccess={() => {
-            refetch(); // recarga los invitados
-            setRefetchFlag((prev) => !prev); // si usas esta opción para re-render
+            refetch();
+            setRefetchFlag((prev) => !prev);
           }}
         />
+      </div>
+
+      {/* Menú Flotante Sutil para Móviles */}
+      <div className="sm:hidden fixed bottom-6 right-6 z-50">
+        <div className="relative">
+          {/* Backdrop blur cuando está abierto */}
+          {isMenuOpen && (
+            <div 
+              className="fixed inset-0 -z-10 bg-black/20 backdrop-blur-sm transition-all duration-300"
+              onClick={() => setIsMenuOpen(false)}
+            />
+          )}
+          
+          {/* Botones flotantes que aparecen */}
+          <div className={cn(
+            "absolute bottom-16 right-0 flex flex-col-reverse gap-4 transition-all duration-500 ease-out",
+            isMenuOpen 
+              ? "opacity-100 translate-y-0 scale-100" 
+              : "opacity-0 translate-y-8 scale-95 pointer-events-none"
+          )}>
+            {/* Agregar Invitado */}
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <DialogTrigger asChild>
+                    <button 
+                      className="p-4 bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <UserRoundPlus className="w-6 h-6" />
+                    </button>
+                  </DialogTrigger>
+                </TooltipTrigger>
+                <TooltipContent side="left" className="bg-zinc-900 text-white">
+                  <span>Agregar Invitado</span>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+
+            {/* Descargar QRs */}
+            <div className="p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-white/20">
+              <DescargarQRsPDF invitados={invitados} />
+            </div>
+
+            {/* Exportar Excel */}
+            <div className="p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-white/20">
+              <ExportExcelButton invitados={invitados} />
+            </div>
+
+            {/* Importar Excel */}
+            <div className="p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-white/20">
+              <ImportExcelInvitados
+                username={username}
+                onSuccess={() => {
+                  refetch();
+                  setRefetchFlag((prev) => !prev);
+                  setIsMenuOpen(false);
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Botón principal flotante */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className={cn(
+              "p-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full shadow-xl hover:shadow-2xl transition-all duration-500 relative overflow-hidden",
+              "before:absolute before:inset-0 before:bg-gradient-to-r before:from-purple-600 before:to-pink-600 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300",
+              isMenuOpen && "rotate-45 scale-110"
+            )}
+          >
+            <div className="relative z-10">
+              {isMenuOpen ? (
+                <X className="w-7 h-7" />
+              ) : (
+                <Plus className="w-7 h-7" />
+              )}
+            </div>
+          </button>
+        </div>
       </div>
       <DialogContent>
         <DialogHeader>
@@ -270,9 +352,29 @@ export default function Pokemon() {
             <p className="text-sm text-zinc-600 dark:text-zinc-400">
               Aún no has agregado ningún invitado. Cuando lo hagas, aparecerán aquí.
             </p>
-            {DialogAgregarInvitado}
+            
+            {/* Botón de agregar para desktop en estado sin invitados */}
+            <div className="hidden sm:block">
+              <DialogTrigger asChild>
+                <Button className="w-full bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white border-0">
+                  <UserRoundPlus className="w-4 h-4 mr-2" />
+                  Agregar Primer Invitado
+                </Button>
+              </DialogTrigger>
+            </div>
           </div>
         </div>
+        
+        {/* Menú flotante para móviles cuando no hay invitados */}
+        <div className="sm:hidden fixed bottom-6 right-6 z-50">
+          <DialogTrigger asChild>
+            <button className="p-4 bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full shadow-xl hover:shadow-2xl hover:scale-110 transition-all duration-300">
+              <UserRoundPlus className="w-7 h-7" />
+            </button>
+          </DialogTrigger>
+        </div>
+        
+        {DialogAgregarInvitado}
       </div>
     );
   }
