@@ -24,12 +24,6 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipProvider,
-} from "@/components/ui/tooltip";
 import { guardarInvitado, obtenerInvitadosPorUsuario } from "@/database/dababase";
 import { useQuery } from "@tanstack/react-query";
 
@@ -120,20 +114,11 @@ export default function Pokemon() {
     <Dialog open={open} onOpenChange={setOpen}>
       {/* Botones para Desktop */}
       <div className="hidden sm:flex w-full justify-end items-center gap-3 mb-6">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <DialogTrigger asChild>
-                <button className="p-2 rounded-full hover:bg-zinc-200 dark:hover:bg-zinc-800 transition">
-                  <UserRoundPlus className="w-6 h-6 text-sky-600" strokeWidth={2.5} />
-                </button>
-              </DialogTrigger>
-            </TooltipTrigger>
-            <TooltipContent side="bottom">
-              <span>Agregar Invitado</span>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <DialogTrigger asChild>
+          <button className="p-2 rounded-full hover:bg-zinc-200 dark:hover:bg-zinc-800 transition">
+            <UserRoundPlus className="w-6 h-6 text-sky-600" strokeWidth={2.5} />
+          </button>
+        </DialogTrigger>
 
         <DescargarQRsPDF invitados={invitados} />
         <ExportExcelButton invitados={invitados} />
@@ -159,42 +144,60 @@ export default function Pokemon() {
           
           {/* Botones flotantes que aparecen */}
           <div className={cn(
-            "absolute bottom-16 right-0 flex flex-col-reverse gap-4 transition-all duration-500 ease-out",
+            "absolute bottom-16 right-0 flex flex-col-reverse gap-3 transition-all duration-500 ease-out",
             isMenuOpen 
               ? "opacity-100 translate-y-0 scale-100" 
               : "opacity-0 translate-y-8 scale-95 pointer-events-none"
           )}>
             {/* Agregar Invitado */}
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <DialogTrigger asChild>
-                    <button 
-                      className="p-4 bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <UserRoundPlus className="w-6 h-6" />
-                    </button>
-                  </DialogTrigger>
-                </TooltipTrigger>
-                <TooltipContent side="left" className="bg-zinc-900 text-white">
-                  <span>Agregar Invitado</span>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <DialogTrigger asChild>
+              <button 
+                className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 text-sm font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <UserRoundPlus className="w-5 h-5" />
+                <span>Agregar Invitado</span>
+              </button>
+            </DialogTrigger>
 
             {/* Descargar QRs */}
-            <div className="p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-white/20">
+            <div 
+              className="flex items-center gap-2 px-4 py-2.5 bg-white/95 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-white/30 cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                const button = e.currentTarget.querySelector('button') as HTMLButtonElement;
+                if (button) button.click();
+                setIsMenuOpen(false);
+              }}
+            >
               <DescargarQRsPDF invitados={invitados} />
+              <span className="text-sm font-medium text-zinc-700">Descargar QRs</span>
             </div>
 
             {/* Exportar Excel */}
-            <div className="p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-white/20">
+            <div 
+              className="flex items-center gap-2 px-4 py-2.5 bg-white/95 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-white/30 cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                const button = e.currentTarget.querySelector('button') as HTMLButtonElement;
+                if (button) button.click();
+                setIsMenuOpen(false);
+              }}
+            >
               <ExportExcelButton invitados={invitados} />
+              <span className="text-sm font-medium text-zinc-700">Exportar Excel</span>
             </div>
 
             {/* Importar Excel */}
-            <div className="p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-white/20">
+            <div 
+              className="flex items-center gap-2 px-4 py-2.5 bg-white/95 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-white/30 cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                const element = e.currentTarget.querySelector('button, input') as HTMLButtonElement | HTMLInputElement;
+                if (element) element.click();
+                setIsMenuOpen(false);
+              }}
+            >
               <ImportExcelInvitados
                 username={username}
                 onSuccess={() => {
@@ -203,6 +206,7 @@ export default function Pokemon() {
                   setIsMenuOpen(false);
                 }}
               />
+              <span className="text-sm font-medium text-zinc-700">Importar Excel</span>
             </div>
           </div>
 
@@ -210,16 +214,16 @@ export default function Pokemon() {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className={cn(
-              "p-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full shadow-xl hover:shadow-2xl transition-all duration-500 relative overflow-hidden",
+              "p-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full shadow-xl hover:shadow-2xl transition-all duration-500 relative overflow-hidden",
               "before:absolute before:inset-0 before:bg-gradient-to-r before:from-purple-600 before:to-pink-600 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300",
               isMenuOpen && "rotate-45 scale-110"
             )}
           >
             <div className="relative z-10">
               {isMenuOpen ? (
-                <X className="w-7 h-7" />
+                <X className="w-6 h-6" />
               ) : (
-                <Plus className="w-7 h-7" />
+                <Plus className="w-6 h-6" />
               )}
             </div>
           </button>
@@ -368,8 +372,9 @@ export default function Pokemon() {
         {/* Menú flotante para móviles cuando no hay invitados */}
         <div className="sm:hidden fixed bottom-6 right-6 z-50">
           <DialogTrigger asChild>
-            <button className="p-4 bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full shadow-xl hover:shadow-2xl hover:scale-110 transition-all duration-300">
-              <UserRoundPlus className="w-7 h-7" />
+            <button className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full shadow-xl hover:shadow-2xl hover:scale-110 transition-all duration-300 text-sm font-medium">
+              <UserRoundPlus className="w-5 h-5" />
+              <span>Agregar Invitado</span>
             </button>
           </DialogTrigger>
         </div>
