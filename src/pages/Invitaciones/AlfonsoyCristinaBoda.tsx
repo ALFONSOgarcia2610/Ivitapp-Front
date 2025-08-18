@@ -122,13 +122,11 @@ export default function InvitacionCompleta() {
       {/* Carrusel con imagenes locales */}
       <div className="relative w-full h-screen overflow-hidden" id="home">
         <audio id="myAudio" src={Musica} autoPlay loop />
-
         <img
           src={slides[0].image}
           alt="Portada"
           className="w-full h-full object-cover md:object-top"
         />
-
         {/* Fondo opaco solo detrás del texto */}
         <div className="absolute top-10 w-full flex justify-center px-4 mt-10">
           <div className="py-4 px-6 text-white text-center max-w-xl w-full">
@@ -164,49 +162,41 @@ export default function InvitacionCompleta() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}
       >
-        <p className="mb-12 text-base leading-relaxed italic text-[#7a6b4f] max-w-md mx-auto">
-          Nos sentimos dichosos de comenzar esta nueva etapa en nuestras vidas y queremos invitarlos a compartir la alegría de unirnos en matrimonio.
-        </p>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-10 gap-x-16">
           {/* Padres de la novia */}
           <div>
             <h3 className="mb-3 font-bold text-xl text-[#8a7962] tracking-wide uppercase">Padres de la Novia</h3>
             <p className="leading-relaxed text-lg">
-              Garcia Caicedo Vicente<br />
+              García Caicedo Vicente<br />
               Espinel Bazantes Sandra
             </p>
           </div>
-
           {/* Padres del novio */}
           <div>
             <h3 className="mb-3 font-bold text-xl text-[#8a7962] tracking-wide uppercase">Padres del Novio</h3>
             <p className="leading-relaxed text-lg">
-              Garcia Celorio Carlos<br />
+              García Celorio Carlos<br />
               Alcivar Anchundia Lourdes
             </p>
           </div>
-
           {/* Padrinos */}
           <div>
             <h3 className="mb-3 font-bold text-xl text-[#8a7962] tracking-wide uppercase">Padrinos</h3>
             <p className="leading-relaxed text-lg">
-              Guerrero Garcia Ricardo<br />
-              Garcia Espinel Carolina
+              Guerrero Saltos Ricardo<br />
+              García Espinel Carolina
             </p>
           </div>
-
           {/* Testigos */}
           <div>
             <h3 className="mb-3 font-bold text-xl text-[#8a7962] tracking-wide uppercase">Testigos</h3>
             <p className="leading-relaxed text-lg">
-              Garcia Mendoza Joel<br />
-              Garcia Espinel Samari
+              García Mendoza Joel<br />
+              García Espinel Samari
             </p>
           </div>
         </div>
       </motion.section>
-
       <motion.section className="max-w-4xl mx-auto px-4 py-6 flex flex-col items-center gap-4" initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.6 }}>
@@ -245,7 +235,8 @@ export default function InvitacionCompleta() {
             ¡Una celebración de amor!
           </h1>
           <p className="text-lg md:text-xl text-gray-700 mb-6 italic">
-            Con gran alegría te invitamos a compartir este momento especial con nosotros.
+                      Nos sentimos dichosos de comenzar esta nueva etapa en nuestras vidas y queremos invitarlos a compartir la alegría de unirnos en matrimonio.
+
           </p>
           <p className="mb-3 font-bold text-xl text-[#8a7962] tracking-wide uppercase font-serif">
             Estimado/a:
@@ -253,7 +244,7 @@ export default function InvitacionCompleta() {
           <p className="mb-3 font-bold text-xl text-gray-800 tracking-wide uppercase font-serif">
             {data.invitado.nombre} {data.invitado.apellido}
           </p>
-          <p className="text-lg md:text-xl text-gray-700">
+          <p className="text-lg md:text-xl text-gray-700 italic">
             Tu presencia es un regalo invaluable. Esperamos compartir juntos un día lleno de emociones, alegría y mucho amor.
           </p>
         </div>
@@ -591,7 +582,7 @@ export default function InvitacionCompleta() {
               <p className="leading-relaxed text-lg text-gray-700 max-w-md mx-auto font-serif">
                 Estamos felices de compartir esta alegría contigo ¡Nos encantaría contar con tu asistencia!
               </p>
-              <p className="text-lg leading-relaxed font-bold text-gray-800 max-w-md mx-auto font-serif tracking-wide">
+              <p className="text-sm leading-relaxed font-bold text-gray-800 max-w-md mx-auto font-serif tracking-wide">
                 RESPETUOSAMENTE NO NIÑOS.
               </p>
               <motion.h2
