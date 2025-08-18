@@ -233,34 +233,26 @@ export default function InvitacionCompleta() {
           />
         </div>
       </motion.section>
-
-
-
       {/* Datos del invitado */}
-
       <motion.div
         className=" bg-[#b39574] bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] bg-repeat flex items-center justify-center m-0 p-10"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-
         <div className="text-center max-w-2xl mt-10 mb-10">
-          <h1 className="mb-3 font-bold text-xl text-gray-800 tracking-wide uppercase font-serif">
+          <h1 className="mb-3 font-bold text-xl text-[#8a7962] tracking-wide uppercase font-serif">
             ¡Una celebración de amor!
           </h1>
-
           <p className="text-lg md:text-xl text-gray-700 mb-6 italic">
             Con gran alegría te invitamos a compartir este momento especial con nosotros.
           </p>
-
-          <p className="mb-3 font-bold text-xl text-gray-700 tracking-wide uppercase font-serif">
+          <p className="mb-3 font-bold text-xl text-[#8a7962] tracking-wide uppercase font-serif">
             Estimado/a:
           </p>
           <p className="mb-3 font-bold text-xl text-gray-800 tracking-wide uppercase font-serif">
             {data.invitado.nombre} {data.invitado.apellido}
           </p>
-
           <p className="text-lg md:text-xl text-gray-700">
             Tu presencia es un regalo invaluable. Esperamos compartir juntos un día lleno de emociones, alegría y mucho amor.
           </p>
@@ -485,7 +477,7 @@ export default function InvitacionCompleta() {
           alt="Sobre cerrado"
           className="mx-auto w-20 h-auto opacity-90 -mt-5"
         />
-        <h3 className=" font-bold text-xl text-gray-800 tracking-wide uppercase font-serif">
+        <h3 className=" font-bold text-xl text-[#8a7962] tracking-wide uppercase font-serif">
           Sugerencia de Regalo
         </h3>
         <p className="leading-relaxed text-lg text-gray-700 max-w-md mx-auto font-serif">
@@ -494,24 +486,22 @@ export default function InvitacionCompleta() {
       </motion.section>
 
       <section className="w-full bg-white py-20 px-6 md:px-12 lg:px-24">
-
-        <div className="max-w-xl mx-auto text-center space-y-20 relative">
+        <div className="max-w-4xl mx-auto text-center space-y-20 relative">
           {/* Línea de tiempo Iglesia - Recepción */}
-          <div className="relative grid grid-cols-3 items-center text-center z-10">
+          <div className="relative flex flex-col md:grid md:grid-cols-3 gap-8 md:gap-0 items-center text-center z-10">
 
             {/* Iglesia */}
-            <div className=" relative z-20 max-w-xs ml-10">
+            <div className="relative z-20 w-full max-w-xs mx-auto">
               <img
                 src={Primera}
                 alt="Iglesia San José"
                 className="mx-auto w-28 h-28 rounded-full object-cover shadow-lg border-4 border-gray-200"
               />
-              <div className="" />
-              <h3 className="mb-3 font-bold text-xl text-gray-800 tracking-wide uppercase font-serif mt-4">
-                Eucaristia
+              <h3 className="mb-3 font-bold text-xl text-[#8a7962] tracking-wide uppercase font-serif mt-4">
+                Eucaristía
               </h3>
               <p className="leading-relaxed text-lg font-bold text-gray-700 font-serif">5:00 PM</p>
-              <p className="max-w-xs mx-auto mt-2 text-gray-700 leading-relaxed font-serif">
+              <p className="max-w-xs mx-auto mt-2 text-gray-700 leading-relaxed font-serif text-center">
                 Iglesia San Ignacio de Loyola
               </p>
               <a
@@ -524,20 +514,29 @@ export default function InvitacionCompleta() {
                 Ubicación
               </a>
             </div>
-            <Separator orientation="vertical" className="mx-auto h-24 bg-gray-300" />
+            
+            {/* Separador - Oculto en móvil, visible en desktop */}
+            <div className="hidden md:flex justify-center">
+              <Separator orientation="vertical" className="h-24 bg-gray-300" />
+            </div>
+            
+            {/* Separador horizontal para móvil */}
+            <div className="md:hidden w-full flex justify-center py-4">
+              <Separator className="w-20 bg-gray-300" />
+            </div>
+
             {/* Recepción */}
-            <div className="relative z-20 max-w-xs mr-10">
+            <div className="relative z-20 w-full max-w-xs mx-auto">
               <img
                 src={Encuentro}
                 alt="Salón El Encanto"
                 className="mx-auto w-28 h-28 rounded-full object-cover shadow-lg border-4 border-gray-200"
               />
-              <div className="" />
-              <h3 className="mb-3 font-bold text-xl text-gray-800 tracking-wide uppercase font-serif mt-4">
+              <h3 className="mb-3 font-bold text-xl text-[#8a7962] tracking-wide uppercase font-serif mt-4">
                 Recepción
               </h3>
               <p className="leading-relaxed text-lg font-bold text-gray-700 font-serif">6:00 PM</p>
-              <p className="max-w-xs mx-auto mt-2 text-gray-700 leading-relaxed font-serif">
+              <p className="max-w-xs mx-auto mt-2 text-gray-700 leading-relaxed font-serif text-center">
                 Eventos La Ramada
               </p>
               <a
@@ -581,7 +580,7 @@ export default function InvitacionCompleta() {
             */}
             {/* Admisión */}
             <div className="flex flex-col items-center gap-4">
-              <Label className="block w-full text-xl text-gray-700 font-serif font-bold">
+              <Label className="block w-full text-xl text-[#8a7962] font-serif font-bold">
                 <TypingText
                   className="text-2xl"
                   text="Confirmación de Asistencia"
@@ -596,7 +595,7 @@ export default function InvitacionCompleta() {
                 RESPETUOSAMENTE NO NIÑOS.
               </p>
               <motion.h2
-                className="text-2xl md:text-2xl font-bold text-gray-800 tracking-wide font-serif"
+                className="text-2xl md:text-2xl font-bold text-[#8a7962] tracking-wide font-serif"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
@@ -614,7 +613,7 @@ export default function InvitacionCompleta() {
 
       {/* Código de Vestimenta */}
       <div className="mt-5">
-        <h2 className="mb-6 font-bold text-2xl text-gray-800 tracking-wide uppercase font-serif">
+        <h2 className="mb-6 font-bold text-2xl text-[#8a7962] tracking-wide uppercase font-serif">
           Código de Vestimenta
         </h2>
         <p className="text-lg leading-relaxed text-gray-700 mb-8 font-serif">
