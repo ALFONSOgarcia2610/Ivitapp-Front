@@ -231,110 +231,6 @@ export default function Pokemon() {
     </div>
   );
 
-  const DialogAgregarInvitado = () => (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Agregar Invitado</DialogTitle>
-          <DialogDescription>
-            Completa los datos del invitado que deseas agregar.
-          </DialogDescription>
-        </DialogHeader>
-
-        <div className="grid gap-4 mt-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-1">
-              <Label>Nombre</Label>
-              <input
-                type="text"
-                value={nombre}
-                onChange={(e) => setNombre(e.target.value)}
-                placeholder="Ej. Juan"
-                className="w-full px-3 py-2 text-sm rounded-lg border dark:bg-zinc-800 dark:border-zinc-600"
-              />
-            </div>
-            <div className="space-y-1">
-              <Label>Apellido</Label>
-              <input
-                type="text"
-                value={apellido}
-                onChange={(e) => setApellido(e.target.value)}
-                placeholder="Ej. Pérez"
-                className="w-full px-3 py-2 text-sm rounded-lg border dark:bg-zinc-800 dark:border-zinc-600"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-1">
-              <Label>Mesa</Label>
-              <input
-                type="number"
-                value={mesa}
-                onChange={(e) =>
-                  setMesa(e.target.value === "" ? "" : Number(e.target.value))
-                }
-                placeholder="Ej. 5"
-                className="w-full px-3 py-2 text-sm rounded-lg border dark:bg-zinc-800 dark:border-zinc-600"
-              />
-            </div>
-            <div className="space-y-1">
-              <Label>Admisión</Label>
-              <input
-                type="number"
-                value={admision}
-                onChange={(e) =>
-                  setAdmision(e.target.value === "" ? "" : Number(e.target.value))
-                }
-                placeholder="Ej. 1"
-                className="w-full px-3 py-2 text-sm rounded-lg border dark:bg-zinc-800 dark:border-zinc-600"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
-            <div className="space-y-1">
-              <Label>Prefijo</Label>
-              <Select
-                value={prefijo}
-                onValueChange={setPrefijo}
-              >
-                <SelectTrigger className="w-full rounded-lg border px-3 py-2 text-sm dark:bg-zinc-800 dark:border-zinc-600">
-                  <SelectValue placeholder="Selecciona prefijo" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="+593">+593</SelectItem>
-                  <SelectItem value="+57">+57</SelectItem>
-                  <SelectItem value="+52">+52</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="col-span-2 space-y-1">
-              <Label>Número de Teléfono</Label>
-              <input
-                type="tel"
-                value={telefono}
-                onChange={(e) => setTelefono(e.target.value)}
-                placeholder="Ej. 987654321"
-                className="w-full px-3 py-2 text-sm rounded-lg border dark:bg-zinc-800 dark:border-zinc-600"
-              />
-            </div>
-          </div>
-        </div>
-
-        <DialogFooter className="mt-6">
-          <Button
-            type="button"
-            onClick={handleGuardar}
-            className="w-full sm:w-auto bg-green-700 hover:bg-green-600"
-          >
-            Guardar
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  );
-
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">Cargando...</div>
@@ -385,7 +281,108 @@ export default function Pokemon() {
           </button>
         </div>
 
-        <DialogAgregarInvitado />
+        {/* Dialog Agregar Invitado */}
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Agregar Invitado</DialogTitle>
+              <DialogDescription>
+                Completa los datos del invitado que deseas agregar.
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="grid gap-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <Label>Nombre</Label>
+                  <input
+                    type="text"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                    placeholder="Ej. Juan"
+                    className="w-full px-3 py-2 text-sm rounded-lg border dark:bg-zinc-800 dark:border-zinc-600"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <Label>Apellido</Label>
+                  <input
+                    type="text"
+                    value={apellido}
+                    onChange={(e) => setApellido(e.target.value)}
+                    placeholder="Ej. Pérez"
+                    className="w-full px-3 py-2 text-sm rounded-lg border dark:bg-zinc-800 dark:border-zinc-600"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <Label>Mesa</Label>
+                  <input
+                    type="number"
+                    value={mesa}
+                    onChange={(e) =>
+                      setMesa(e.target.value === "" ? "" : Number(e.target.value))
+                    }
+                    placeholder="Ej. 5"
+                    className="w-full px-3 py-2 text-sm rounded-lg border dark:bg-zinc-800 dark:border-zinc-600"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <Label>Admisión</Label>
+                  <input
+                    type="number"
+                    value={admision}
+                    onChange={(e) =>
+                      setAdmision(e.target.value === "" ? "" : Number(e.target.value))
+                    }
+                    placeholder="Ej. 1"
+                    className="w-full px-3 py-2 text-sm rounded-lg border dark:bg-zinc-800 dark:border-zinc-600"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
+                <div className="space-y-1">
+                  <Label>Prefijo</Label>
+                  <Select
+                    value={prefijo}
+                    onValueChange={setPrefijo}
+                  >
+                    <SelectTrigger className="w-full rounded-lg border px-3 py-2 text-sm dark:bg-zinc-800 dark:border-zinc-600">
+                      <SelectValue placeholder="Selecciona prefijo" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="+593">+593</SelectItem>
+                      <SelectItem value="+57">+57</SelectItem>
+                      <SelectItem value="+52">+52</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="col-span-2 space-y-1">
+                  <Label>Número de Teléfono</Label>
+                  <input
+                    type="tel"
+                    value={telefono}
+                    onChange={(e) => setTelefono(e.target.value)}
+                    placeholder="Ej. 987654321"
+                    className="w-full px-3 py-2 text-sm rounded-lg border dark:bg-zinc-800 dark:border-zinc-600"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <DialogFooter className="mt-6">
+              <Button
+                type="button"
+                onClick={handleGuardar}
+                className="w-full sm:w-auto bg-green-700 hover:bg-green-600"
+              >
+                Guardar
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     );
   }
@@ -426,7 +423,109 @@ export default function Pokemon() {
       </div>
 
       <MenuMovil />
-      <DialogAgregarInvitado />
+
+      {/* Dialog Agregar Invitado */}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Agregar Invitado</DialogTitle>
+            <DialogDescription>
+              Completa los datos del invitado que deseas agregar.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="grid gap-4 mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <Label>Nombre</Label>
+                <input
+                  type="text"
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
+                  placeholder="Ej. Juan"
+                  className="w-full px-3 py-2 text-sm rounded-lg border dark:bg-zinc-800 dark:border-zinc-600"
+                />
+              </div>
+              <div className="space-y-1">
+                <Label>Apellido</Label>
+                <input
+                  type="text"
+                  value={apellido}
+                  onChange={(e) => setApellido(e.target.value)}
+                  placeholder="Ej. Pérez"
+                  className="w-full px-3 py-2 text-sm rounded-lg border dark:bg-zinc-800 dark:border-zinc-600"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <Label>Mesa</Label>
+                <input
+                  type="number"
+                  value={mesa}
+                  onChange={(e) =>
+                    setMesa(e.target.value === "" ? "" : Number(e.target.value))
+                  }
+                  placeholder="Ej. 5"
+                  className="w-full px-3 py-2 text-sm rounded-lg border dark:bg-zinc-800 dark:border-zinc-600"
+                />
+              </div>
+              <div className="space-y-1">
+                <Label>Admisión</Label>
+                <input
+                  type="number"
+                  value={admision}
+                  onChange={(e) =>
+                    setAdmision(e.target.value === "" ? "" : Number(e.target.value))
+                  }
+                  placeholder="Ej. 1"
+                  className="w-full px-3 py-2 text-sm rounded-lg border dark:bg-zinc-800 dark:border-zinc-600"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
+              <div className="space-y-1">
+                <Label>Prefijo</Label>
+                <Select
+                  value={prefijo}
+                  onValueChange={setPrefijo}
+                >
+                  <SelectTrigger className="w-full rounded-lg border px-3 py-2 text-sm dark:bg-zinc-800 dark:border-zinc-600">
+                    <SelectValue placeholder="Selecciona prefijo" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="+593">+593</SelectItem>
+                    <SelectItem value="+57">+57</SelectItem>
+                    <SelectItem value="+52">+52</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="col-span-2 space-y-1">
+                <Label>Número de Teléfono</Label>
+                <input
+                  type="tel"
+                  value={telefono}
+                  onChange={(e) => setTelefono(e.target.value)}
+                  placeholder="Ej. 987654321"
+                  className="w-full px-3 py-2 text-sm rounded-lg border dark:bg-zinc-800 dark:border-zinc-600"
+                />
+              </div>
+            </div>
+          </div>
+
+          <DialogFooter className="mt-6">
+            <Button
+              type="button"
+              onClick={handleGuardar}
+              className="w-full sm:w-auto bg-green-700 hover:bg-green-600"
+            >
+              Guardar
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
