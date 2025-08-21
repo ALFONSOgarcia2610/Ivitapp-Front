@@ -136,22 +136,22 @@ export default function Pokemon() {
         <div className="relative">
           {/* Backdrop blur cuando está abierto */}
           {isMenuOpen && (
-            <div 
+            <div
               className="fixed inset-0 -z-10 bg-black/20 backdrop-blur-sm transition-all duration-300"
               onClick={() => setIsMenuOpen(false)}
             />
           )}
-          
+
           {/* Botones flotantes que aparecen */}
           <div className={cn(
             "absolute bottom-16 right-0 flex flex-col-reverse gap-3 transition-all duration-500 ease-out",
-            isMenuOpen 
-              ? "opacity-100 translate-y-0 scale-100" 
+            isMenuOpen
+              ? "opacity-100 translate-y-0 scale-100"
               : "opacity-0 translate-y-8 scale-95 pointer-events-none"
           )}>
             {/* Agregar Invitado */}
             <DialogTrigger asChild>
-              <button 
+              <button
                 className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 text-sm font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -161,7 +161,7 @@ export default function Pokemon() {
             </DialogTrigger>
 
             {/* Descargar QRs */}
-            <div 
+            <div
               className="flex items-center gap-2 px-4 py-2.5 bg-white/95 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-white/30 cursor-pointer"
               onClick={(e) => {
                 e.stopPropagation();
@@ -175,7 +175,7 @@ export default function Pokemon() {
             </div>
 
             {/* Exportar Excel */}
-            <div 
+            <div
               className="flex items-center gap-2 px-4 py-2.5 bg-white/95 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-white/30 cursor-pointer"
               onClick={(e) => {
                 e.stopPropagation();
@@ -189,7 +189,7 @@ export default function Pokemon() {
             </div>
 
             {/* Importar Excel */}
-            <div 
+            <div
               className="flex items-center gap-2 px-4 py-2.5 bg-white/95 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-white/30 cursor-pointer"
               onClick={(e) => {
                 e.stopPropagation();
@@ -357,7 +357,7 @@ export default function Pokemon() {
               <p className="text-sm text-zinc-600 dark:text-zinc-400">
                 Aún no has agregado ningún invitado. Cuando lo hagas, aparecerán aquí.
               </p>
-              
+
               {/* Botón de agregar para desktop en estado sin invitados */}
               <div className="hidden sm:block">
                 <DialogTrigger asChild>
@@ -369,7 +369,7 @@ export default function Pokemon() {
               </div>
             </div>
           </div>
-          
+
           {/* Menú flotante para móviles cuando no hay invitados */}
           <div className="sm:hidden fixed bottom-6 right-6 z-50">
             <DialogTrigger asChild>
@@ -380,7 +380,7 @@ export default function Pokemon() {
             </DialogTrigger>
           </div>
         </div>
-        
+
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Agregar Invitado</DialogTitle>
@@ -500,7 +500,7 @@ export default function Pokemon() {
           {/* Header con logo y botón */}
           <div className="flex justify-between items-center mb-6">
             <img src={logotwo} alt="Logo" className="w-30 h-auto" />
-            
+
             {/* Botones para Desktop */}
             <div className="hidden sm:flex w-full justify-end items-center gap-3 mb-6">
               <DialogTrigger asChild>
@@ -525,22 +525,22 @@ export default function Pokemon() {
               <div className="relative">
                 {/* Backdrop blur cuando está abierto */}
                 {isMenuOpen && (
-                  <div 
+                  <div
                     className="fixed inset-0 -z-10 bg-black/20 backdrop-blur-sm transition-all duration-300"
                     onClick={() => setIsMenuOpen(false)}
                   />
                 )}
-                
+
                 {/* Botones flotantes que aparecen */}
                 <div className={cn(
                   "absolute bottom-16 right-0 flex flex-col-reverse gap-3 transition-all duration-500 ease-out",
-                  isMenuOpen 
-                    ? "opacity-100 translate-y-0 scale-100" 
+                  isMenuOpen
+                    ? "opacity-100 translate-y-0 scale-100"
                     : "opacity-0 translate-y-8 scale-95 pointer-events-none"
                 )}>
                   {/* Agregar Invitado */}
                   <DialogTrigger asChild>
-                    <button 
+                    <button
                       className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 text-sm font-medium"
                       onClick={() => setIsMenuOpen(false)}
                     >
@@ -550,7 +550,7 @@ export default function Pokemon() {
                   </DialogTrigger>
 
                   {/* Descargar QRs */}
-                  <div 
+                  <div
                     className="flex items-center gap-2 px-4 py-2.5 bg-white/95 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-white/30 cursor-pointer"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -564,7 +564,7 @@ export default function Pokemon() {
                   </div>
 
                   {/* Exportar Excel */}
-                  <div 
+                  <div
                     className="flex items-center gap-2 px-4 py-2.5 bg-white/95 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-white/30 cursor-pointer"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -578,7 +578,7 @@ export default function Pokemon() {
                   </div>
 
                   {/* Importar Excel */}
-                  <div 
+                  <div
                     className="flex items-center gap-2 px-4 py-2.5 bg-white/95 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-white/30 cursor-pointer"
                     onClick={(e) => {
                       e.stopPropagation();
