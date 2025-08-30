@@ -582,9 +582,7 @@ export default function InvitacionCompleta() {
               <p className="leading-relaxed text-lg text-gray-700 max-w-md mx-auto font-serif">
                 Estamos felices de compartir esta alegría contigo ¡Nos encantaría contar con tu asistencia!
               </p>
-              <p className="text-sm leading-relaxed font-bold text-gray-800 max-w-md mx-auto font-serif tracking-wide">
-                RESPETUOSAMENTE NO NIÑOS.
-              </p>
+             
               <motion.h2
                 className="text-2xl md:text-2xl font-bold text-[#8a7962] tracking-wide font-serif"
                 initial={{ opacity: 0, y: 30 }}
